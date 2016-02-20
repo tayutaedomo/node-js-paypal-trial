@@ -26,7 +26,8 @@ router.get('/', function(req, res, next) {
 router.get('/plan', function(req, res, next) {
   res.render('subscriptions/plan', {
     title: 'Subscription Plan Creation',
-    error: {}
+    error: {},
+    billingPlan: {}
   });
 });
 
@@ -38,59 +39,44 @@ router.post('/plan', function(req, res, next) {
       res.render('subscriptions/plan', {
         title: 'Subscription Plan Creation Failed',
         error: err,
-        errorStr: beautify(JSON.stringify(err), { indent_size: 2 })
+        errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
+        billingPlan: {}
       });
     } else {
       res.render('subscriptions/plan', {
         title: 'Subscription Plan Created',
-        billingPlan: billingPlan
+        error: {},
+        billingPlan: billingPlan,
+        billingPlanStr: beautify(JSON.stringify(billingPlan), { indent_size: 2 })
       });
     }
   });
 });
 
-/*
-  // Parameter Sample
-  var billingPlanAttributes = {
-    "merchant_preferences": {
-      "auto_bill_amount": "yes",
-      "cancel_url": "https://example.com/cancel",
-      "return_url": "https://example.com/success",
-    },
-    "name": "Billing Plan",
-    "description": "Monthly billing plan",
-    "type": "UNLIMITED", // UNLIMITED or FIXED
-    "payment_definitions": [
-      {
-        "amount": {
-          "currency": "USD",
-          "value": "5.10"
-        },
-        "cycles": "0",
-        "frequency": "MONTH",
-        "frequency_interval": "1",
-        "name": "Regular Plan",
-        "type": "REGULAR"
-      },
-      {
-        "amount": {
-          "currency": "USD",
-          "value": "5.10"
-        },
-        "cycles": "1",
-        "frequency": "WEEK",
-        "frequency_interval": "1",
-        "name": "Trial Plan",
-        "type": "TRIAL"
-      }
-    ]
-  };
-*/
 function createBillingPlanAttributesFrom(req) {
   return {
     name: req.body.name,
     description: req.body.description,
-    type: req.body.type
+    type: req.body.type,
+    payment_definitions: [
+      {
+        name: req.body.pd_name,
+        type: req.body.pd_type,
+        frequency_interval: req.body.pd_frequency_interval,
+        frequency: req.body.pd_frequency,
+        cycles: req.body.pd_cycles,
+        amount: {
+          currency: req.body.pd_currency,
+          value: req.body.pd_amount
+        }
+      },
+    ],
+    merchant_preferences: {
+      cancel_url: req.body.mp_cancel_url,
+      return_url: req.body.mp_return_url,
+      auto_bill_amount: req.body.mp_auto_bill_amount,
+      initial_fail_amount_action: req.body.mp_initial_fail_amount_action
+    }
   };
 }
 
