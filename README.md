@@ -25,3 +25,20 @@ $ bin/www
 ```
 Your app should now be running on http://localhost:3000.
 
+
+# References
+- Overview
+  - https://developer.paypal.com/docs/integration/direct/rest-payments-overview/
+
+- Billing Plans and Agreements
+  - https://developer.paypal.com/docs/integration/direct/create-billing-plan/
+  - https://developer.paypal.com/docs/integration/direct/create-billing-agreement/
+
+## API
+- Docs
+  - https://developer.paypal.com/docs/api/#billing-plans-and-agreements
+  - https://developer.paypal.com/docs/rest/api/payments.billing-plans/
+
+## Leaning the Subscription billing from subscription button
+- https://www.paypal.com/webapps/mpp/get-started/subscription-button
+
