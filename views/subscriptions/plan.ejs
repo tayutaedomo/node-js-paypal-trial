@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>PayPal Billing Plan</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
-<body>
-</body>
-</html>
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<h2>Billing Plan Form</h2>
+<form method="post" action="/subscriptions/plan">
+  <div class="row">
+    <label>Name: </label><input type="text" name="name" value="Billing plan name" size=64>
+  </div>
+  <div class="row">
+    <label>Description: </label><input type="text" name="description" value="Billing plan description" size=64>
+  </div>
+  <div class="row">
+    <label>Type: </label>
+    <input id="type_unlimited" type="radio" name="type" value="unlimited" checked="checked"><label for="type_unlimited">unlimited</label>
+    <input id="type_fixed" type="radio" name="type" value="fixed"><label for="type_fixed">fixed</label>
+  </div>
+  <div class="row">
+    <input type="submit">
+  </div>
+</form>
+
+<% if (JSON.stringify(error) !== '{}') { %>
+  <h2>API call Failed</h2>
+  <pre>
+    <code><%= errorStr %></code>
+  </pre>
+<% } %>
 
