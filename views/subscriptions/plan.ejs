@@ -16,7 +16,6 @@
     <label>Type: </label>
     <select name="type">
       <option value="INFINITE" selected="selected">INFINITE</option>
-      <option value="UNLIMITED">UNLIMITED</option>
       <option value="FIXED">FIXED</option>
     </select>
   </div>
@@ -104,8 +103,8 @@
 <% } %>
 
 <% if (JSON.stringify(billingPlan) !== '{}') { %>
-<h2>API call succeeded</h2>
-<pre>
+  <h2>API call succeeded</h2>
+  <pre>
     <code><%= billingPlanStr %></code>
   </pre>
 <% } %>

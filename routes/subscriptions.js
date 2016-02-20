@@ -80,6 +80,46 @@ function createBillingPlanAttributesFrom(req) {
   };
 }
 
+router.get('/plan_activation', function(req, res, next) {
+  res.render('subscriptions/plan_activation', {
+    title: 'Subscription Plan Activation',
+    error: {},
+    result: {}
+  });
+});
+
+router.post('/plan_activation', function(req, res, next) {
+  //paypal.billingPlan.update(req.body.plan_id, createBillingPlanUpdateAttributes(), function (err, response) {
+  console.log(req.body.plan_id);
+  paypal.billingPlan.activate(req.body.plan_id, function (err, result) {
+    if (err) {
+      res.render('subscriptions/plan_activation', {
+        title: 'Subscription Plan Activation Failed',
+        error: err,
+        errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
+        result: {}
+      });
+    } else {
+      res.render('subscriptions/plan_activation', {
+        title: 'Subscription Plan Activated',
+        error: {},
+        result: result,
+        resultStr: beautify(JSON.stringify(result), { indent_size: 2 })
+      });
+    }
+  });
+});
+
+function createBillingPlanUpdateAttributes() {
+  return {
+    op: 'replace',
+    path: '/',
+    value: {
+      state: 'ACTIVE'
+    }
+  };
+}
+
 
 module.exports = router;
 

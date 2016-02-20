@@ -1,0 +1,30 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<h2>Billing Plan Activation Form</h2>
+
+<form method="post" action="/subscriptions/plan_activation">
+  <div class="row">
+    <label>Plan ID: </label>
+    <input type="text" name="plan_id" value="" size=64>
+  </div>
+  <div class="row">
+    <input type="submit">
+  </div>
+</form>
+
+<% if (JSON.stringify(error) !== '{}') { %>
+  <h2>API call Failed</h2>
+  <pre>
+    <code><%= errorStr %></code>
+  </pre>
+<% } %>
+
+<% if (JSON.stringify(result) !== '{}') { %>
+  <h2>API call succeeded</h2>
+  <pre>
+    <code><%= resultStr %></code>
+  </pre>
+<% } %>
+
