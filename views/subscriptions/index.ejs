@@ -1,0 +1,14 @@
+<% layout('layout') %>
+
+<h1>PayPal Initialization Check</h1>
+
+<% if (JSON.stringify(error) !== '{}') { %>
+  <label>API call Failed.</label>
+  <p><%= JSON.stringify(error) %></p>
+<% } else { %>
+  <label>Your API token:</label>
+  <form>
+    <input name="token" value="<%= token %>" size="128">
+  </form>
+<% } %>
+
