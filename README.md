@@ -2,6 +2,11 @@
 Try PayPal subscription on Node.js
 
 # Setup on your local
+Install node-dev.
+```
+$ npm install -g node-dev
+```
+
 git clone and start app.
 ```
 $ git clone git@github.com:tayutaedomo/node-paypal-subscription.git
