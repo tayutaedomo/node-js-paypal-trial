@@ -108,6 +108,50 @@ router.post('/plan_activation', function(req, res, next) {
   });
 });
 
+router.get('/agreement', function(req, res, next) {
+  res.render('subscriptions/agreement', {
+    title: 'Subscription Agreement Creation',
+    error: {},
+    billingAgreement: {}
+  });
+});
+
+router.post('/agreement', function(req, res, next) {
+  var billingAgreementAttributes = createBillingAgreementAttributes(req);
+
+  paypal.billingAgreement.create(billingAgreementAttributes, function (err, billingAgreement) {
+    if (err) {
+      res.render('subscriptions/agreement', {
+        title: 'Subscription Agreement Creation Failed',
+        error: err,
+        errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
+        billingAgreement: {}
+      });
+    } else {
+      res.render('subscriptions/agreement', {
+        title: 'Subscription Agreement Created',
+        error: {},
+        billingAgreement: billingAgreement,
+        billingAgreementStr: beautify(JSON.stringify(billingAgreement), { indent_size: 2 })
+      });
+    }
+  });
+});
+
+function createBillingAgreementAttributes(req) {
+  return {
+    name: req.body.name,
+    description: req.body.description,
+    start_date: req.body.start_date,
+    payer: {
+      payment_method: req.body.payment_method
+    },
+    plan: {
+      id: req.body.plan_id
+    }
+  };
+}
+
 
 module.exports = router;
 
