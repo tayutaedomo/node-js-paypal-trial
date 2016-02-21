@@ -26,6 +26,31 @@ $ bin/www
 Your app should now be running on http://localhost:3000.
 
 
+# Operation
+## Confirm Configuration
+Access [http://localhost:3000/subscriptions](http://localhost:3000/subscriptions) on your browser.
+If display your API token, configuration is OK.
+
+## Subscribe
+### Create a new billing plan
+Access [http://localhost:3000/subscriptions/plan](http://localhost:3000/subscriptions/plan) on your browser.
+Set some parameters, and then submit.
+If succeeded, you can get plan id string.
+
+### Activate billing plan
+Access [http://localhost:3000/subscriptions/plan_activation](http://localhost:3000/subscriptions/plan_activation) on your browser.
+Set your created plan id, and then submit.
+
+### Create a new billing agreement
+Access [http://localhost:3000/subscriptions/agreement](http://localhost:3000/subscriptions/agreement) on your browser.
+Set your agreement id and some parameters, and then submit.
+If succeeded, you can get a approval url like 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-62016054V8774611A'.
+
+### Approve billing
+Access the approval url on your browser, and then approve the billing on PayPal.
+You get callback of success or cancel.
+
+
 # References
 - Overview
   - https://developer.paypal.com/docs/integration/direct/rest-payments-overview/
