@@ -166,6 +166,34 @@ router.get('/callback/cancel', function(req, res, next) {
   });
 });
 
+router.get('/agreement_execution', function(req, res, next) {
+  res.render('subscriptions/agreement_execution', {
+    title: 'Subscription Agreement Execution',
+    error: {},
+    result: {}
+  });
+});
+
+router.post('/agreement_execution', function(req, res, next) {
+  paypal.billingAgreement.execute(req.body.token, function (err, result) {
+    if (err) {
+      res.render('subscriptions/agreement_execution', {
+        title: 'Subscription Agreement Execution Failed',
+        error: err,
+        errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
+        result: {}
+      });
+    } else {
+      res.render('subscriptions/agreement_execution', {
+        title: 'Subscription Agreement Executed',
+        error: {},
+        result: result,
+        resultStr: beautify(JSON.stringify(result), { indent_size: 2 })
+      });
+    }
+  });
+});
+
 
 module.exports = router;
 
