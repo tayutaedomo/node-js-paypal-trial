@@ -89,8 +89,6 @@ router.get('/plan_activation', function(req, res, next) {
 });
 
 router.post('/plan_activation', function(req, res, next) {
-  //paypal.billingPlan.update(req.body.plan_id, createBillingPlanUpdateAttributes(), function (err, response) {
-  console.log(req.body.plan_id);
   paypal.billingPlan.activate(req.body.plan_id, function (err, result) {
     if (err) {
       res.render('subscriptions/plan_activation', {
@@ -109,16 +107,6 @@ router.post('/plan_activation', function(req, res, next) {
     }
   });
 });
-
-function createBillingPlanUpdateAttributes() {
-  return {
-    op: 'replace',
-    path: '/',
-    value: {
-      state: 'ACTIVE'
-    }
-  };
-}
 
 
 module.exports = router;
