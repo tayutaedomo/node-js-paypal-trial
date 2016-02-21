@@ -152,6 +152,20 @@ function createBillingAgreementAttributes(req) {
   };
 }
 
+router.get('/callback/success', function(req, res, next) {
+  res.render('subscriptions/callback/success', {
+    title: 'Subscription Success Callback',
+    data: { token: req.query.token }
+  });
+});
+
+router.get('/callback/cancel', function(req, res, next) {
+  res.render('subscriptions/callback/cancel', {
+    title: 'Subscription Cancel Callback',
+    data: { token: req.query.token }
+  });
+});
+
 
 module.exports = router;
 
