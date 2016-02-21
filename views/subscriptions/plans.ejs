@@ -1,0 +1,17 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<% if (JSON.stringify(error) !== '{}') { %>
+  <h2>API call Failed</h2>
+  <pre>
+    <code><%= errorStr %></code>
+  </pre>
+<% } %>
+
+<% if (data.plansStr) { %>
+  <pre>
+    <code><%= data.plansStr %></code>
+  </pre>
+<% } %>
+

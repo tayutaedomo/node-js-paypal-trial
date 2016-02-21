@@ -23,6 +23,25 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/plans', function(req, res, next) {
+  paypal.billingPlan.list(function (err, result) {
+    if (err) {
+      res.render('subscriptions/plans', {
+        title: 'Subscription Plans',
+        error: err,
+        errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
+        billingPlan: {}
+      });
+    } else {
+      res.render('subscriptions/plans', {
+        title: 'Subscription Plans',
+        error: {},
+        data: { plans: result, plansStr: beautify(JSON.stringify(result), { indent_size: 2 }) }
+      });
+    }
+  });
+});
+
 router.get('/plan', function(req, res, next) {
   res.render('subscriptions/plan', {
     title: 'Subscription Plan Creation',
