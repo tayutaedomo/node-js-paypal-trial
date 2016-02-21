@@ -49,6 +49,11 @@ If succeeded, you can get a approval url like 'https://www.sandbox.paypal.com/cg
 ### Approve billing
 Access the approval url on your browser, and then approve the billing on PayPal.
 You get callback of success or cancel.
+If you get success, copy token.
+
+### Execute billing agreement
+Access [http://localhost:3000/subscriptions/agreement_execution](http://localhost:3000/subscriptions/agreement_execution) on your browser.
+Set the token, and then submit.
 
 
 # References
