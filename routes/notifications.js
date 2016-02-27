@@ -16,8 +16,8 @@ paypal.configure({
 router.get('/webhooks', function(req, res, next) {
   paypal.notification.webhook.list(function (err, result) {
     if (err) {
-      res.render('/plans', {
-        title: 'Subscription Plans',
+      res.render('notifications/webhooks', {
+        title: 'Notification Webhooks',
         error: err,
         errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
       });
@@ -33,6 +33,28 @@ router.get('/webhooks', function(req, res, next) {
     }
   });
 });
+
+router.get('/webhook_event_types', function(req, res, next) {
+  paypal.notification.webhookEventType.list(function (err, result) {
+    if (err) {
+      res.render('notifications/webhook_event_types', {
+        title: 'Notification Webhook Event Types',
+        error: err,
+        errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
+      });
+    } else {
+      res.render('notifications/webhook_event_types', {
+        title: 'Notification Webhook Event Types',
+        error: {},
+        data: {
+          webhookEventTypes: result,
+          webhookEventTypesStr: beautify(JSON.stringify(result), { indent_size: 2 })
+        }
+      });
+    }
+  });
+});
+
 
 module.exports = router;
 
