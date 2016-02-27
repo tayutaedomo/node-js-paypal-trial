@@ -24,7 +24,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/plans', function(req, res, next) {
-  paypal.billingPlan.list(function (err, result) {
+  var status_param = req.query.status || 'created';
+
+  paypal.billingPlan.list({ status: status_param }, function (err, result) {
     if (err) {
       res.render('subscriptions/plans', {
         title: 'Subscription Plans',

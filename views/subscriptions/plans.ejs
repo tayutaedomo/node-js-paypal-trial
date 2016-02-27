@@ -2,14 +2,31 @@
 
 <h1><%= title %></h1>
 
+<form method="get" action="/subscriptions/plans">
+  <div class="row">
+    <label>Status: </label>
+    <select name="status">
+      <option value="created" selected="selected">CREATED</option>
+      <option value="active">ACTIVE</option>
+      <option value="inactive">INACTIVE</option>
+    </select>
+  </div>
+  <div class="row">
+    <button class="btn btn-info">Search</button>
+  </div>
+</form>
+
 <% if (JSON.stringify(error) !== '{}') { %>
-  <h2>API call Failed</h2>
-  <pre>
-    <code><%= errorStr %></code>
-  </pre>
+  <div class="row">
+    <h2>API call Failed</h2>
+    <pre><code><%= errorStr %></code></pre>
+  </div>
 <% } %>
 
 <% if (data.plansStr) { %>
-  <pre><code><%= data.plansStr %></code></pre>
+  <div class="row">
+    <h2>Result</h2>
+    <pre><code><%= data.plansStr %></code></pre>
+  </div>
 <% } %>
 
