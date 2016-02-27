@@ -84,6 +84,7 @@ router.get('/webhook_event_types', function(req, res, next) {
 router.post('/webhook/listener', function(req, res, next) {
   console.log(req.body);
   console.log(req.body.id);
+  console.log(req.body.resource.id);
   res.send('OK');
 });
 
