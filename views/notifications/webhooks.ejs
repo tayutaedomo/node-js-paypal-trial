@@ -1,0 +1,22 @@
+<% layout('layout') %>
+
+<div class="row">
+
+  <div class="col-lg-6">
+    <h1><%= title %></h1>
+  </div>
+
+  <% if (JSON.stringify(error) !== '{}') { %>
+    <div class="col-lg-6">
+      <h2>API call Failed</h2>
+      <pre><code><%= errorStr %></code></pre>
+    </div>
+  <% } else { %>
+    <div class="col-lg-6">
+      <h2>Result</h2>
+      <pre><code><%= data.webhooksStr %></code></pre>
+    </div>
+  <% } %>
+
+</div>
+
