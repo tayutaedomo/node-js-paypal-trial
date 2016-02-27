@@ -1,0 +1,32 @@
+<% layout('layout') %>
+
+<div class="row">
+
+  <div class="col-lg-6">
+    <h1><%= title %></h1>
+  </div>
+
+  <form method="get" action="/notifications/webhook_events">
+    <div class="col-lg-6">
+      <label>Page Size: </label>
+      <input type="number" name="page_size" value="10">
+    </div>
+    <div class="col-lg-6">
+      <button class="btn btn-info">Search</button>
+    </div>
+  </form>
+
+  <% if (JSON.stringify(error) !== '{}') { %>
+    <div class="col-lg-6">
+      <h2>API call Failed</h2>
+      <pre><code><%= errorStr %></code></pre>
+    </div>
+  <% } else { %>
+    <div class="col-lg-6">
+      <h2>Result</h2>
+      <pre><code><%= data.webhookEventsStr %></code></pre>
+    </div>
+  <% } %>
+
+</div>
+

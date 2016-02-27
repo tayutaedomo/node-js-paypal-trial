@@ -34,6 +34,29 @@ router.get('/webhooks', function(req, res, next) {
   });
 });
 
+router.get('/webhook_events', function(req, res, next) {
+  var pageSizeParam = req.query['page_size'] || 'created';
+
+  paypal.notification.webhookEvent.list({ page_size: 0 }, function (err, result) {
+    if (err) {
+      res.render('notifications/webhook_events', {
+        title: 'Notification Webhook Events',
+        error: err,
+        errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
+      });
+    } else {
+      res.render('notifications/webhook_events', {
+        title: 'Notification Webhook Events',
+        error: {},
+        data: {
+          webhookEvents: result,
+          webhookEventsStr: beautify(JSON.stringify(result), { indent_size: 2 })
+        }
+      });
+    }
+  });
+});
+
 router.get('/webhook_event_types', function(req, res, next) {
   paypal.notification.webhookEventType.list(function (err, result) {
     if (err) {
