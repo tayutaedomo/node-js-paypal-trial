@@ -4,29 +4,34 @@
 
 <form method="get" action="/subscriptions/plans">
   <div class="row">
-    <label>Status: </label>
-    <select name="status">
-      <option value="created" selected="selected">CREATED</option>
-      <option value="active">ACTIVE</option>
-      <option value="inactive">INACTIVE</option>
-    </select>
-  </div>
-  <div class="row">
-    <button class="btn btn-info">Search</button>
+    <div class="col-lg-6">
+      <label>Status: </label>
+      <select name="status">
+        <option value="created" selected="selected">CREATED</option>
+        <option value="active">ACTIVE</option>
+        <option value="inactive">INACTIVE</option>
+      </select>
+    </div>
+    <div class="col-lg-6">
+      <label>Page Size: </label>
+      <input type="number" name="page_size" value="10">
+    </div>
+    <div class="col-lg-6">
+      <button class="btn btn-info">Search</button>
+    </div>
   </div>
 </form>
 
-<% if (JSON.stringify(error) !== '{}') { %>
-  <div class="row">
-    <h2>API call Failed</h2>
-    <pre><code><%= errorStr %></code></pre>
+<div class="row">
+  <div class="col-lg-6">
+    <% if (JSON.stringify(error) !== '{}') { %>
+      <h2>API call Failed</h2>
+      <pre><code><%= errorStr %></code></pre>
+    <% } %>
+    <% if (data.plansStr) { %>
+      <h2>Result</h2>
+      <pre><code><%= data.plansStr %></code></pre>
+    <% } %>
   </div>
-<% } %>
-
-<% if (data.plansStr) { %>
-  <div class="row">
-    <h2>Result</h2>
-    <pre><code><%= data.plansStr %></code></pre>
-  </div>
-<% } %>
+</div>
 

@@ -1,14 +1,17 @@
 <% layout('layout') %>
 
-<h1><%= title %></h1>
-
-<% if (JSON.stringify(error) !== '{}') { %>
-  <label>API call Failed.</label>
-  <p><%= JSON.stringify(error) %></p>
-<% } else { %>
-  <label>Your API token:</label>
-  <form>
-    <input name="token" value="<%= token %>" size="128">
-  </form>
-<% } %>
+<div class="row">
+  <div class="col-lg-6">
+    <h1><%= title %></h1>
+  </div>
+  <div class="col-lg-6">
+    <% if (JSON.stringify(error) !== '{}') { %>
+      <label>API call Failed.</label>
+      <p><%= JSON.stringify(error) %></p>
+    <% } else { %>
+      <label>Your API token:</label>
+      <pre><code><%= token %></code></pre>
+    <% } %>
+  </div>
+</div>
 
