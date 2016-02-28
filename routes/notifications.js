@@ -1,4 +1,5 @@
 var paypal = require('paypal-rest-sdk');
+var ipn = require('pp-ipn');
 var express = require('express');
 var router = express.Router();
 var beautify = require('js-beautify').js_beautify;
@@ -86,6 +87,30 @@ router.post('/webhook/listener', function(req, res, next) {
   console.log(req.body.id);
   console.log(req.body.resource.id);
   res.send('OK');
+});
+
+router.post('/ipn/listener', function(req, res, next) {
+  console.log(req.query);
+  console.log(req.body);
+
+  var settings = { 'allow_sandbox': true };
+
+  ipn.verify(req.body, settings, function callback(err, msg) {
+    if (err) {
+      console.error(err);
+
+    } else {
+      console.log(msg);
+
+      // Do stuff with original params here
+
+      if (req.body.payment_status == 'Completed') {
+        // Payment has been confirmed as completed
+      }
+    }
+
+    res.send('OK');
+  });
 });
 
 
