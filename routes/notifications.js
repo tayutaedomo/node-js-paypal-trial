@@ -89,6 +89,35 @@ router.post('/webhook/listener', function(req, res, next) {
   res.send('OK');
 });
 
+/*
+ * ex) curl "http://localhost:3000/notifications/ipn/listener?foo=bar"
+ */
+router.get('/ipn/listener', function(req, res, next) {
+  console.log(req.query);
+
+  var settings = { 'allow_sandbox': true };
+
+  ipn.verify(req.query, settings, function callback(err, msg) {
+    if (err) {
+      console.error(err);
+
+    } else {
+      console.log(msg);
+
+      // Do stuff with original params here
+
+      if (req.query.payment_status == 'Completed') {
+        // Payment has been confirmed as completed
+      }
+    }
+
+    res.send('OK');
+  });
+});
+
+/*
+ * ex) curl "http://localhost:3000/notifications/ipn/listener" -d "foo=bar"
+ */
 router.post('/ipn/listener', function(req, res, next) {
   console.log(req.query);
   console.log(req.body);
