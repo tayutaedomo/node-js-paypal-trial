@@ -32,7 +32,7 @@ router.get('/plans', function(req, res, next) {
         title: 'Subscription Plans',
         error: err,
         errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
-        data: {},
+        data: {}
       });
     } else {
       res.render('subscriptions/plans', {
@@ -176,6 +176,39 @@ function createBillingAgreementAttributes(req) {
     }
   };
 }
+
+router.get('/agreement/detail', function(req, res, next) {
+  var agreement_id = req.query.id;
+
+  if (! agreement_id) {
+    res.render('subscriptions/agreement_detail', {
+      title: 'Subscription Agreement Detail',
+      error: {},
+      billingAgreement: {}
+    });
+    return;
+  }
+
+  //var params = { agreement_id: req.query.id };
+
+  paypal.billingAgreement.get(req.query.id, function (err, billingAgreement) {
+    if (err) {
+      res.render('subscriptions/agreement_detail', {
+        title: 'Subscription Agreement Detail Failed',
+        error: err,
+        errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
+        billingAgreement: {}
+      });
+    } else {
+      res.render('subscriptions/agreement_detail', {
+        title: 'Subscription Agreement Detail',
+        error: {},
+        billingAgreement: billingAgreement,
+        billingAgreementStr: beautify(JSON.stringify(billingAgreement), { indent_size: 2 })
+      });
+    }
+  });
+});
 
 router.get('/callback/success', function(req, res, next) {
   res.render('subscriptions/callback/success', {
