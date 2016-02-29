@@ -2,10 +2,10 @@
 
 <h1><%= title %></h1>
 
-<form method="get" action="/subscriptions/agreement/detail">
+<form method="get" action="/subscriptions/plan/detail">
   <div class="row">
     <div class="col-lg-6">
-      <label>Agreement ID: </label>
+      <label>Plan ID: </label>
       <input type="text" name="id" value="">
     </div>
     <div class="col-lg-6">
@@ -21,9 +21,9 @@
       <pre><code><%= errorStr %></code></pre>
     <% } %>
 
-    <% if (JSON.stringify(billingAgreement) !== '{}') { %>
+    <% if (JSON.stringify(billingPlan) !== '{}') { %>
       <h2>API call succeeded</h2>
-      <pre><code><%= billingAgreementStr %></code></pre>
+      <pre><code><%= billingPlanStr %></code></pre>
     <% } %>
   </div>
 </div>

@@ -133,6 +133,37 @@ router.post('/plan_activation', function(req, res, next) {
   });
 });
 
+router.get('/plan/detail', function(req, res, next) {
+  var planId = req.query.id;
+
+  if (! planId) {
+    res.render('subscriptions/plan_detail', {
+      title: 'Subscription Plan Detail',
+      error: {},
+      billingPlan: {}
+    });
+    return;
+  }
+
+  paypal.billingPlan.get(planId, function (err, billingPlan) {
+    if (err) {
+      res.render('subscriptions/plan_detail', {
+        title: 'Subscription Plan Detail Failed',
+        error: err,
+        errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
+        billingPlan: {}
+      });
+    } else {
+      res.render('subscriptions/plan_detail', {
+        title: 'Subscription Plan Detail',
+        error: {},
+        billingPlan: billingPlan,
+        billingPlanStr: beautify(JSON.stringify(billingPlan), { indent_size: 2 })
+      });
+    }
+  });
+});
+
 router.get('/agreement', function(req, res, next) {
   res.render('subscriptions/agreement', {
     title: 'Subscription Agreement Creation',
@@ -178,9 +209,9 @@ function createBillingAgreementAttributes(req) {
 }
 
 router.get('/agreement/detail', function(req, res, next) {
-  var agreement_id = req.query.id;
+  var agreementId = req.query.id;
 
-  if (! agreement_id) {
+  if (! agreementId) {
     res.render('subscriptions/agreement_detail', {
       title: 'Subscription Agreement Detail',
       error: {},
@@ -189,9 +220,7 @@ router.get('/agreement/detail', function(req, res, next) {
     return;
   }
 
-  //var params = { agreement_id: req.query.id };
-
-  paypal.billingAgreement.get(req.query.id, function (err, billingAgreement) {
+  paypal.billingAgreement.get(agreementId, function (err, billingAgreement) {
     if (err) {
       res.render('subscriptions/agreement_detail', {
         title: 'Subscription Agreement Detail Failed',
