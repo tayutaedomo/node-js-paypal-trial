@@ -32,7 +32,7 @@ router.get('/plans', function(req, res, next) {
         title: 'Subscription Plans',
         error: err,
         errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
-        billingPlan: {}
+        data: {},
       });
     } else {
       res.render('subscriptions/plans', {
@@ -93,6 +93,10 @@ function createBillingPlanAttributesFrom(req) {
       },
     ],
     merchant_preferences: {
+      setup_fee: {
+        currency: req.body.mp_setup_currency,
+        value: req.body.pd_setup_amount
+      },
       cancel_url: req.body.mp_cancel_url,
       return_url: req.body.mp_return_url,
       auto_bill_amount: req.body.mp_auto_bill_amount,
