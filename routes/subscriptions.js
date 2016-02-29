@@ -2,6 +2,7 @@ var paypal = require('paypal-rest-sdk');
 var express = require('express');
 var router = express.Router();
 var beautify = require('js-beautify').js_beautify;
+var moment = require('moment');
 
 //
 // Initialize PayPal
@@ -234,6 +235,56 @@ router.get('/agreement/detail', function(req, res, next) {
         error: {},
         billingAgreement: billingAgreement,
         billingAgreementStr: beautify(JSON.stringify(billingAgreement), { indent_size: 2 })
+      });
+    }
+  });
+});
+
+router.get('/agreement/transactions', function(req, res, next) {
+  var agreementId = req.query.id;
+  var startDate = req.query.startDate;
+  var endDate = req.query.endDate;
+  var formInputs = {
+    agreementId: agreementId || '',
+    startDate: startDate || moment().utc().format("YYYY-MM-DD"),
+    endDate: endDate || moment().utc().add(1, 'months').format("YYYY-MM-DD")
+  };
+
+  console.log(agreementId);
+  console.log(startDate);
+  console.log(endDate);
+  if (! agreementId || ! startDate || ! endDate) {
+    res.render('subscriptions/agreement_transactions', {
+      title: 'Subscription Agreement Transactions',
+      error: {},
+      data: {
+        formInputs: formInputs
+      }
+    });
+    return;
+  }
+
+  paypal.billingAgreement.searchTransactions(
+      agreementId, startDate, endDate, function (err, billingAgreementTransactions) {
+
+    if (err) {
+      res.render('subscriptions/agreement_transactions', {
+        title: 'Subscription Agreement Transactions Failed',
+        error: err,
+        errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
+        data: {
+          formInputs: formInputs
+        }
+      });
+    } else {
+      res.render('subscriptions/agreement_transactions', {
+        title: 'Subscription Agreement Transactions',
+        error: {},
+        data: {
+          formInputs: formInputs,
+          result: billingAgreementTransactions,
+          resultStr: beautify(JSON.stringify(billingAgreementTransactions), { indent_size: 2 })
+        }
       });
     }
   });

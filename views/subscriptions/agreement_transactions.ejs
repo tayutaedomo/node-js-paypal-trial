@@ -1,0 +1,37 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<form method="get" action="/subscriptions/agreement/transactions">
+  <div class="row">
+    <div class="col-lg-6">
+      <label>Agreement ID: </label>
+      <input type="text" name="id" value="<%= data.formInputs.agreementId %>" size="32">
+    </div>
+    <div class="col-lg-6">
+      <label>Start Date: </label>
+      <input type="text" name="startDate" value="<%= data.formInputs.startDate %>" size="32">
+    </div>
+    <div class="col-lg-6">
+      <label>End Date: </label>
+      <input type="text" name="endDate" value="<%= data.formInputs.endDate %>" size="32">
+    </div>
+    <div class="col-lg-6">
+      <button type="submit" class="btn btn-info">Retrieve</button>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col-lg-6">
+    <% if (JSON.stringify(error) !== '{}') { %>
+      <h2>API call failed</h2>
+      <pre><code><%= errorStr %></code></pre>
+    <% } %>
+
+    <% if (data.result) { %>
+      <h2>API call succeeded</h2>
+      <pre><code><%= data.resultStr %></code></pre>
+    <% } %>
+  </div>
+</div>
