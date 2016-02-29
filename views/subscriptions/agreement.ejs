@@ -1,48 +1,75 @@
 <% layout('layout') %>
 
-<h1><%= title %></h1>
+<div class="row">
+  <div class="col-lg-6">
+    <h1><%= title %></h1>
+  </div>
+</div>
 
-<h2>Billing Agreement Form</h2>
+<div class="row">
+  <div class="col-lg-6">
+    <h2>Billing Agreement Form</h2>
+  </div>
+</div>
 
 <form method="post" action="/subscriptions/agreement">
   <div class="row">
-    <label>Name: </label>
-    <input type="text" name="name" value="Billing agreement name" size=64>
-  </div>
-  <div class="row">
-    <label>Description: </label>
-    <input type="text" name="description" value="Billing agreement description" size=64>
-  </div>
-  <div class="row">
-    <label>Start Date: </label>
-    <input type="text" name="start_date" value="2017-01-01T00:00:00Z" size=64>
-  </div>
-  <div class="row">
-    <label>Payment Method: </label>
-    <select name="payment_method">
-      <option value="paypal" selected="selected">paypal</option>
-      <option value="credit_card">Credit Card</option>
-    </select>
-  </div>
-  <div class="row">
-    <label>Plan ID: </label>
-    <input type="text" name="plan_id" value="" size=64>
-  </div>
+    <div class="col-lg-6">
+      <label>Name: </label>
+      <input type="text" name="name" value="Billing agreement name" size=64>
+    </div>
+    <div class="col-lg-6">
+      <label>Description: </label>
+      <input type="text" name="description" value="Billing agreement description" size=64>
+    </div>
+    <div class="col-lg-6">
+      <label>Start Date: </label>
+      <input type="text" name="startDate" value="<%= data.formInputs.startDate %>" size=64>
+    </div>
+    <div class="col-lg-6">
+      <label>Payment Method: </label>
+      <select name="paymentMethod">
+        <option value="paypal" selected="selected">paypal</option>
+        <option value="credit_card">Credit Card</option>
+      </select>
+    </div>
+    <div class="col-lg-6">
+      <label>Plan ID: </label>
+      <input type="text" name="planId" value="" size=64>
+    </div>
 
-  <br>
+    <div class="col-lg-6">
+      <h3>Merchant Preferences</h3>
+    </div>
+    <div class="col-lg-6">
+      <label>Setup fee currency: </label>
+      <select name="mpSetupCurrency">
+        <option value="USD" selected="selected">USD</option>
+        <option value="JPY">JPY</option>
+      </select>
+    </div>
+    <div class="col-lg-6">
+      <label>Setup fee amount: </label>
+      <input type="text" name="pdSetupAmount" value="9.99">
+    </div>
 
-  <div class="row">
-    <input type="submit">
+    <div class="col-lg-6">
+      <button type="submit" class="btn btn-info">Submit</button>
+    </div>
   </div>
 </form>
 
-<% if (JSON.stringify(error) !== '{}') { %>
-  <h2>API call Failed</h2>
-  <pre><code><%= errorStr %></code></pre>
-<% } %>
+<div class="row">
+  <div class="col-lg-6">
+    <% if (JSON.stringify(error) !== '{}') { %>
+      <label>API call Failed</label>
+      <pre><code><%= errorStr %></code></pre>
+    <% } %>
 
-<% if (JSON.stringify(billingAgreement) !== '{}') { %>
-  <h2>API call succeeded</h2>
-  <pre><code><%= billingAgreementStr %></code></pre>
-<% } %>
+    <% if (data.billingAgreement) { %>
+      <label>API call succeeded</label>
+      <pre><code><%= data.billingAgreementStr %></code></pre>
+    <% } %>
+  </div>
+</div>
 

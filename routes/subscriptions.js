@@ -169,7 +169,9 @@ router.get('/agreement', function(req, res, next) {
   res.render('subscriptions/agreement', {
     title: 'Subscription Agreement Creation',
     error: {},
-    billingAgreement: {}
+    data: {
+      formInputs: createBillingAgreementFormInputs(req)
+    }
   });
 });
 
@@ -182,29 +184,46 @@ router.post('/agreement', function(req, res, next) {
         title: 'Subscription Agreement Creation Failed',
         error: err,
         errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
-        billingAgreement: {}
+        data: {
+          formInputs: createBillingAgreementFormInputs(req)
+        }
       });
     } else {
       res.render('subscriptions/agreement', {
         title: 'Subscription Agreement Created',
         error: {},
-        billingAgreement: billingAgreement,
-        billingAgreementStr: beautify(JSON.stringify(billingAgreement), { indent_size: 2 })
+        data: {
+          formInputs: createBillingAgreementFormInputs(req),
+          billingAgreement: billingAgreement,
+          billingAgreementStr: beautify(JSON.stringify(billingAgreement), { indent_size: 2 })
+        }
       });
     }
   });
 });
 
+function createBillingAgreementFormInputs(req) {
+  return {
+    startDate: req.body.startDate || moment().utc().add(1, 'minutes').toISOString(),
+  };
+}
+
 function createBillingAgreementAttributes(req) {
   return {
     name: req.body.name,
     description: req.body.description,
-    start_date: req.body.start_date,
+    start_date: req.body.startDate,
     payer: {
-      payment_method: req.body.payment_method
+      payment_method: req.body.paymentMethod
     },
     plan: {
-      id: req.body.plan_id
+      id: req.body.planId
+    },
+    override_merchant_preferences: {
+      setup_fee: {
+        currency: req.body.mpSetupCurrency,
+        value: req.body.pdSetupAmount
+      }
     }
   };
 }
