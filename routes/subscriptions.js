@@ -218,13 +218,13 @@ function createBillingAgreementAttributes(req) {
     },
     plan: {
       id: req.body.planId
-    },
-    override_merchant_preferences: {
-      setup_fee: {
-        currency: req.body.mpSetupCurrency,
-        value: req.body.pdSetupAmount
-      }
     }
+    //override_merchant_preferences: {
+    //  setup_fee: {
+    //    currency: req.body.mpSetupCurrency,
+    //    value: req.body.pdSetupAmount
+    //  }
+    //}
   };
 }
 
