@@ -7,14 +7,18 @@
     <div class="col-lg-6">
       <label>Status: </label>
       <select name="status">
-        <option value="created" selected="selected">CREATED</option>
-        <option value="active">ACTIVE</option>
+        <option value="active" selected="selected">ACTIVE</option>
+        <option value="created">CREATED</option>
         <option value="inactive">INACTIVE</option>
       </select>
     </div>
     <div class="col-lg-6">
+      <label>Page Number: </label>
+      <input type="number" name="page" value="<%= data.inputParams['page'] %>">
+    </div>
+    <div class="col-lg-6">
       <label>Page Size: </label>
-      <input type="number" name="page_size" value="10">
+      <input type="number" name="page_size" value="<%= data.inputParams['page_size'] %>">
     </div>
     <div class="col-lg-6">
       <button type="submit" class="btn btn-info">Search</button>
@@ -29,7 +33,7 @@
       <pre><code><%= errorStr %></code></pre>
     <% } %>
     <% if (data.plansStr) { %>
-      <h2>Result</h2>
+      <h2>Result (<%= data.planCount || 0 %>)</h2>
       <pre><code><%= data.plansStr %></code></pre>
     <% } %>
   </div>

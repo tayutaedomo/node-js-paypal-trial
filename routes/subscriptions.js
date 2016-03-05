@@ -25,21 +25,32 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/plans', function(req, res, next) {
-  var statusParam = req.query['status'] || 'created';
+  var searchCondition = {
+    status: req.query['status'] || 'active',
+    page: req.query['page'] || 0,
+    page_size: req.query['page_size'] || 3
+  };
 
-  paypal.billingPlan.list({ status: statusParam }, function (err, result) {
+  paypal.billingPlan.list(searchCondition, function (err, result) {
     if (err) {
       res.render('subscriptions/plans', {
         title: 'Subscription Plans',
         error: err,
         errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
-        data: {}
+        data: {
+          inputParams: searchCondition
+        }
       });
     } else {
       res.render('subscriptions/plans', {
         title: 'Subscription Plans',
         error: {},
-        data: { plans: result, plansStr: beautify(JSON.stringify(result), { indent_size: 2 }) }
+        data: {
+          inputParams: searchCondition,
+          plans: result,
+          planCount: result.plans.length,
+          plansStr: beautify(JSON.stringify(result), { indent_size: 2 })
+        }
       });
     }
   });
