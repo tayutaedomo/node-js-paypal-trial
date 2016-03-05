@@ -83,7 +83,7 @@ router.get('/webhook_event_types', function(req, res, next) {
  * ex) curl "http://localhost:3000/notifications/webhook/listener" -d "foo=bar"
  */
 router.post('/webhook/listener', function(req, res, next) {
-  console.log(req.body);
+  console.log(JSON.stringify(req.body));
   console.log(req.body.id);
   console.log(req.body.resource.id);
   res.send('OK');
@@ -93,17 +93,17 @@ router.post('/webhook/listener', function(req, res, next) {
  * ex) curl "http://localhost:3000/notifications/ipn/listener" -d "foo=bar"
  */
 router.post('/ipn/listener', function(req, res, next) {
-  console.log(req.query);
-  console.log(req.body);
+  console.log(JSON.stringify(req.query));
+  console.log(JSON.stringify(req.body));
 
   var settings = { 'allow_sandbox': true };
 
   ipn.verify(req.body, settings, function callback(err, msg) {
     if (err) {
-      console.error(err);
+      console.error(JSON.stringify(err));
 
     } else {
-      console.log(msg);
+      console.log(JSON.stringify(msg));
 
       // Do stuff with original params here
 
