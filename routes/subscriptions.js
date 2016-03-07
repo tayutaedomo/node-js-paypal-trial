@@ -48,7 +48,7 @@ router.get('/plans', function(req, res, next) {
         data: {
           inputParams: searchCondition,
           plans: result,
-          planCount: result.plans.length,
+          planCount: result.plans ? result.plans.length : 0,
           plansStr: beautify(JSON.stringify(result), { indent_size: 2 })
         }
       });
