@@ -1,125 +1,150 @@
 <% layout('layout') %>
 
-<div class="row">
-  <div class="col-lg-6">
-    <h1><%= title %></h1>
-  </div>
-</div>
+<h1><%= title %></h1>
 
 <div class="row">
-  <div class="col-lg-6">
-    <h2>Billing Plan Form</h2>
-  </div>
-</div>
+  <div class="col-sm-12">
+    <form method="post" action="/subscriptions/plan" class="form-horizontal">
 
-<form method="post" action="/subscriptions/plan">
-  <div class="row">
-    <div class="col-lg-6">
-      <label>Name: </label>
-      <input type="text" name="name" value="Billing plan name" size=64>
-    </div>
-    <div class="col-lg-6">
-      <label>Description: </label>
-      <input type="text" name="description" value="Billing plan description" size=64>
-    </div>
-    <div class="col-lg-6">
-      <label>Type: </label>
-      <select name="type">
-        <option value="INFINITE" selected="selected">INFINITE</option>
-        <option value="FIXED">FIXED</option>
-      </select>
-    </div>
+      <h3>Billing Plan Form</h3>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Name</label>
+        <div class="col-sm-9">
+          <input type="text" name="name" value="Billing plan name" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Description</label>
+        <div class="col-sm-9">
+          <input type="text" name="description" value="Billing plan description" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Type</label>
+        <div class="col-sm-9">
+          <select name="type" class="form-control">
+            <option value="INFINITE" selected="selected">INFINITE</option>
+            <option value="FIXED">FIXED</option>
+          </select>
+        </div>
+      </div>
 
-    <div class="col-lg-6">
       <h3>Payment Definition</h3>
-    </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Name</label>
+        <div class="col-sm-9">
+          <input type="text" name="pd_name" value="Payment definition name" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Type</label>
+        <div class="col-sm-9">
+          <select name="pd_type" class="form-control">
+            <option value="REGULAR" selected="selected">REGULAR</option>
+            <option value="TRIAL">TRIAL</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Frequency Interval</label>
+        <div class="col-sm-9">
+          <input type="number" name="pd_frequency_interval" value="1" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Frequency</label>
+        <div class="col-sm-9">
+          <select name="pd_frequency" class="form-control">
+            <option value="YEAR" selected="selected">YEAR</option>
+            <option value="MONTH">MONTH</option>
+            <option value="WEEK">WEEK</option>
+            <option value="DAY">DAY</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Cycles</label>
+        <div class="col-sm-9">
+          <input type="number" name="pd_cycles" value="0" class="form-control">
+          <blockquote class="small m-b-1">
+            <p>Number of cycles in this payment definition. For INFINITE type plans, cycles should be set to 0 for a REGULAR type payment_definition.</p>
+          </blockquote>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Currency</label>
+        <div class="col-sm-9">
+          <select name="pd_currency" class="form-control">
+            <option value="USD" selected="selected">USD</option>
+            <option value="JPY">JPY</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Amount</label>
+        <div class="col-sm-9">
+          <input type="text" name="pd_amount" value="9.99" class="form-control">
+        </div>
+      </div>
 
-    <div class="col-lg-6">
-      <label>Name: </label>
-      <input type="text" name="pd_name" value="Payment definition name" size=64>
-    </div>
-    <div class="col-lg-6">
-      <label>Type: </label>
-      <select name="pd_type">
-        <option value="REGULAR" selected="selected">REGULAR</option>
-        <option value="TRIAL">TRIAL</option>
-      </select>
-    </div>
-    <div class="col-lg-6">
-      <label>Frequency Interval: </label>
-      <input type="number" name="pd_frequency_interval" value="1">
-    </div>
-    <div class="col-lg-6">
-      <label>Frequency: </label>
-      <select name="pd_frequency">
-        <option value="YEAR" selected="selected">YEAR</option>
-        <option value="MONTH">MONTH</option>
-        <option value="WEEK">WEEK</option>
-        <option value="DAY">DAY</option>
-      </select>
-    </div>
-    <div class="col-lg-6">
-      <label>Cycles: </label>
-      <input type="number" name="pd_cycles" value="0">
-      <blockquote>Number of cycles in this payment definition. For INFINITE type plans, cycles should be set to 0 for a REGULAR type payment_definition.</blockquote>
-    </div>
-    <div class="col-lg-6">
-      <label>Currency: </label>
-      <select name="pd_currency">
-        <option value="USD" selected="selected">USD</option>
-        <option value="JPY">JPY</option>
-      </select>
-    </div>
-    <div class="col-lg-6">
-      <label>Amount: </label>
-      <input type="text" name="pd_amount" value="9.99">
-    </div>
-
-    <div class="col-lg-6">
       <h3>Merchant Preferences</h3>
-    </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Setup fee currency</label>
+        <div class="col-sm-9">
+          <select name="mp_setup_currency" class="form-control">
+            <option value="USD" selected="selected">USD</option>
+            <option value="JPY">JPY</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Setup fee amount</label>
+        <div class="col-sm-9">
+          <input type="text" name="pd_setup_amount" value="9.99" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Cancel URL</label>
+        <div class="col-sm-9">
+          <input type="text" name="mp_cancel_url" value="http://localhost:3000/subscriptions/callback/cancel"
+                 class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Return URL</label>
+        <div class="col-sm-9">
+          <input type="text" name="mp_return_url" value="http://localhost:3000/subscriptions/callback/success"
+                 class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Auto bill amount</label>
+        <div class="col-sm-9">
+          <select name="mp_auto_bill_amount"class="form-control">
+            <option value="YES" selected="selected">YES</option>
+            <option value="NO">NO</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Initial fail amount action</label>
+        <div class="col-sm-9">
+          <select name="mp_initial_fail_amount_action"class="form-control">
+            <option value="CANCEL" selected="selected">CANCEL</option>
+            <option value="CONTINUE">CONTINUE</option>
+          </select>
+        </div>
+      </div>
 
-    <div class="col-lg-6">
-      <label>Setup fee currency: </label>
-      <select name="mp_setup_currency">
-        <option value="USD" selected="selected">USD</option>
-        <option value="JPY">JPY</option>
-      </select>
-    </div>
-    <div class="col-lg-6">
-      <label>Setup fee amount: </label>
-      <input type="text" name="pd_setup_amount" value="9.99">
-    </div>
-    <div class="col-lg-6">
-      <label>Cancel URL: </label>
-      <input type="text" name="mp_cancel_url" value="http://localhost:3000/subscriptions/callback/cancel" size=64>
-    </div>
-    <div class="col-lg-6">
-      <label>Return URL: </label>
-      <input type="text" name="mp_return_url" value="http://localhost:3000/subscriptions/callback/success" size=64>
-    </div>
-    <div class="col-lg-6">
-      <label>Auto bill amount: </label>
-      <select name="mp_auto_bill_amount">
-        <option value="YES" selected="selected">YES</option>
-        <option value="NO">NO</option>
-      </select>
-    </div>
-    <div class="col-lg-6">
-      <label>Initial fail amount action: </label>
-      <select name="mp_initial_fail_amount_action">
-        <option value="CANCEL" selected="selected">CANCEL</option>
-        <option value="CONTINUE">CONTINUE</option>
-      </select>
-    </div>
-  </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <button type="submit" class="btn btn-info btn-lg">Submit</button>
+        </div>
+      </div>
 
-  <div class="row padding-large-vertical">
-    <div class="col-lg-6">
-      <button type="submit" class="btn btn-info btn-lg">Submit</button>
-    </div>
+    </form>
   </div>
-</form>
+</div>
 
 <div class="row">
   <div class="col-lg-6">
