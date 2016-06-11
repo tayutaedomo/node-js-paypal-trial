@@ -19,12 +19,12 @@
 <div class="row">
   <div class="col-sm-12">
     <% if (JSON.stringify(error) !== '{}') { %>
-      <h2>API call Failed</h2>
+      <label>API call Failed</label>
       <pre class="bg-danger"><code><%= errorStr %></code></pre>
     <% } %>
 
     <% if (JSON.stringify(result) !== '{}') { %>
-      <h2>API call succeeded</h2>
+      <label>API call succeeded</label>
       <pre class="bg-success"><code><%= resultStr %></code></pre>
     <% } %>
   </div>

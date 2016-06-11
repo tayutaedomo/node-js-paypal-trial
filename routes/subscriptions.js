@@ -363,6 +363,39 @@ router.post('/agreement_execution', function(req, res, next) {
   });
 });
 
+router.get('/agreement_cancellation', function(req, res, next) {
+  res.render('subscriptions/agreement_cancellation', {
+    title: 'Subscription Agreement Cancellation',
+    error: {},
+    result: {}
+  });
+});
+
+router.post('/agreement_cancellation', function(req, res, next) {
+  var params = {
+    note: 'Manually canceled.'
+  };
+  paypal.billingAgreement.cancel(req.body.id, params, function (err, result) {
+    var template = 'subscriptions/agreement_cancellation';
+
+    if (err) {
+      res.render(template, {
+        title: 'Subscription Agreement Cancellation Failed',
+        error: err,
+        errorStr: beautify(JSON.stringify(err), { indent_size: 2 }),
+        result: {}
+      });
+    } else {
+      res.render(template, {
+        title: 'Subscription Agreement Canceled',
+        error: {},
+        result: result,
+        resultStr: beautify(JSON.stringify(result), { indent_size: 2 })
+      });
+    }
+  });
+});
+
 
 module.exports = router;
 
