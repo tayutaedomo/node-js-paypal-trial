@@ -2,39 +2,44 @@
 
 <h1><%= title %></h1>
 
-<form method="get" action="/subscriptions/plans">
-  <div class="row">
-    <div class="col-lg-6">
-      <label>Status: </label>
-      <select name="status">
-        <option value="active" selected="selected">ACTIVE</option>
-        <option value="created">CREATED</option>
-        <option value="inactive">INACTIVE</option>
-      </select>
-    </div>
-    <div class="col-lg-6">
-      <label>Page Number: </label>
-      <input type="number" name="page" value="<%= data.inputParams['page'] %>">
-    </div>
-    <div class="col-lg-6">
-      <label>Page Size: </label>
-      <input type="number" name="page_size" value="<%= data.inputParams['page_size'] %>">
-    </div>
-    <div class="col-lg-6">
-      <button type="submit" class="btn btn-info">Search</button>
-    </div>
+<div class="row">
+  <div class="col-sm-12">
+    <form method="get" action="/subscriptions/plans" class="form-inline">
+      <div class="form-group form-group-sm">
+        <label>Status</label>
+        <select name="status" class="form-control">
+          <option value="active" selected="selected">ACTIVE</option>
+          <option value="created">CREATED</option>
+          <option value="inactive">INACTIVE</option>
+        </select>
+      </div>
+      <div class="form-group form-group-sm">
+        <label>Page Num</label>
+        <input type="number" name="page" value="<%= data.inputParams['page'] %>"
+               class="form-control" style="width: 60px;">
+      </div>
+      <div class="form-group form-group-sm">
+        <label>Page Size</label>
+        <input type="number" name="page_size" value="<%= data.inputParams['page_size'] %>"
+               class="form-control" style="width: 60px;">
+      </div>
+      <div class="form-group form-group-sm">
+        <button type="submit" class="btn btn-info">Search</button>
+      </div>
+    </form>
   </div>
-</form>
+</div>
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-sm-12">
     <% if (JSON.stringify(error) !== '{}') { %>
       <h2>API call Failed</h2>
-      <pre><code><%= errorStr %></code></pre>
+      <pre class="bg-danger"><code><%= errorStr %></code></pre>
     <% } %>
+
     <% if (data.plansStr) { %>
       <h2>Result (<%= data.planCount || 0 %>)</h2>
-      <pre><code><%= data.plansStr %></code></pre>
+      <pre class="bg-success"><code><%= data.plansStr %></code></pre>
     <% } %>
   </div>
 </div>

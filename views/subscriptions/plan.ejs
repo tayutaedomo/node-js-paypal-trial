@@ -7,19 +7,19 @@
     <form method="post" action="/subscriptions/plan" class="form-horizontal">
 
       <h3>Billing Plan Form</h3>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Name</label>
         <div class="col-sm-9">
           <input type="text" name="name" value="Billing plan name" class="form-control">
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Description</label>
         <div class="col-sm-9">
           <input type="text" name="description" value="Billing plan description" class="form-control">
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Type</label>
         <div class="col-sm-9">
           <select name="type" class="form-control">
@@ -30,13 +30,13 @@
       </div>
 
       <h3>Payment Definition</h3>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Name</label>
         <div class="col-sm-9">
           <input type="text" name="pd_name" value="Payment definition name" class="form-control">
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Type</label>
         <div class="col-sm-9">
           <select name="pd_type" class="form-control">
@@ -45,13 +45,13 @@
           </select>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Frequency Interval</label>
         <div class="col-sm-9">
           <input type="number" name="pd_frequency_interval" value="1" class="form-control">
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Frequency</label>
         <div class="col-sm-9">
           <select name="pd_frequency" class="form-control">
@@ -62,7 +62,7 @@
           </select>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Cycles</label>
         <div class="col-sm-9">
           <input type="number" name="pd_cycles" value="0" class="form-control">
@@ -71,7 +71,7 @@
           </blockquote>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Currency</label>
         <div class="col-sm-9">
           <select name="pd_currency" class="form-control">
@@ -80,7 +80,7 @@
           </select>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Amount</label>
         <div class="col-sm-9">
           <input type="text" name="pd_amount" value="9.99" class="form-control">
@@ -88,7 +88,7 @@
       </div>
 
       <h3>Merchant Preferences</h3>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Setup fee currency</label>
         <div class="col-sm-9">
           <select name="mp_setup_currency" class="form-control">
@@ -97,39 +97,39 @@
           </select>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Setup fee amount</label>
         <div class="col-sm-9">
           <input type="text" name="pd_setup_amount" value="9.99" class="form-control">
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Cancel URL</label>
         <div class="col-sm-9">
           <input type="text" name="mp_cancel_url" value="http://localhost:3000/subscriptions/callback/cancel"
                  class="form-control">
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Return URL</label>
         <div class="col-sm-9">
           <input type="text" name="mp_return_url" value="http://localhost:3000/subscriptions/callback/success"
                  class="form-control">
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Auto bill amount</label>
         <div class="col-sm-9">
-          <select name="mp_auto_bill_amount"class="form-control">
+          <select name="mp_auto_bill_amount" class="form-control">
             <option value="YES" selected="selected">YES</option>
             <option value="NO">NO</option>
           </select>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Initial fail amount action</label>
         <div class="col-sm-9">
-          <select name="mp_initial_fail_amount_action"class="form-control">
+          <select name="mp_initial_fail_amount_action" class="form-control">
             <option value="CANCEL" selected="selected">CANCEL</option>
             <option value="CONTINUE">CONTINUE</option>
           </select>
@@ -138,24 +138,23 @@
 
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
-          <button type="submit" class="btn btn-info btn-lg">Submit</button>
+          <button type="submit" class="btn btn-info">Submit</button>
         </div>
       </div>
-
     </form>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-sm-12">
     <% if (JSON.stringify(error) !== '{}') { %>
       <label>API call Failed</label>
-      <pre><code><%= errorStr %></code></pre>
+      <pre class="bg-danger"><code><%= errorStr %></code></pre>
     <% } %>
 
     <% if (JSON.stringify(billingPlan) !== '{}') { %>
       <label>API call succeeded</label>
-      <pre><code><%= billingPlanStr %></code></pre>
+      <pre class="bg-success"><code><%= billingPlanStr %></code></pre>
     <% } %>
   </div>
 </div>
