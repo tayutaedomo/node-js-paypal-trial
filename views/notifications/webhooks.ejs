@@ -1,22 +1,16 @@
 <% layout('layout') %>
 
+<h1><%= title %></h1>
+
 <div class="row">
-
-  <div class="col-lg-6">
-    <h1><%= title %></h1>
+  <div class="col-sm-12">
+    <% if (JSON.stringify(error) !== '{}') { %>
+      <label>API call Failed</label>
+      <pre class="bg-danger"><code><%= errorStr %></code></pre>
+    <% } else { %>
+      <label>Result</label>
+      <pre class="bg-success"><code><%= data.webhooksStr %></code></pre>
+    <% } %>
   </div>
-
-  <% if (JSON.stringify(error) !== '{}') { %>
-    <div class="col-lg-6">
-      <h2>API call Failed</h2>
-      <pre><code><%= errorStr %></code></pre>
-    </div>
-  <% } else { %>
-    <div class="col-lg-6">
-      <h2>Result</h2>
-      <pre><code><%= data.webhooksStr %></code></pre>
-    </div>
-  <% } %>
-
 </div>
 

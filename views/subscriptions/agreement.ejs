@@ -1,76 +1,84 @@
 <% layout('layout') %>
 
-<div class="row">
-  <div class="col-lg-6">
-    <h1><%= title %></h1>
-  </div>
-</div>
+<h1><%= title %></h1>
 
 <div class="row">
-  <div class="col-lg-6">
-    <h2>Billing Agreement Form</h2>
-  </div>
-</div>
+  <div class="col-sm-12">
+    <form method="post" action="/subscriptions/agreement" class="form-horizontal">
 
-<form method="post" action="/subscriptions/agreement">
-  <div class="row">
-    <div class="col-lg-6">
-      <label>Name: </label>
-      <input type="text" name="name" value="Billing agreement name" size=64>
-    </div>
-    <div class="col-lg-6">
-      <label>Description: </label>
-      <input type="text" name="description" value="Billing agreement description" size=64>
-    </div>
-    <div class="col-lg-6">
-      <label>Start Date: </label>
-      <input type="text" name="startDate" value="<%= data.formInputs.startDate %>" size=64>
-    </div>
-    <div class="col-lg-6">
-      <label>Payment Method: </label>
-      <select name="paymentMethod">
-        <option value="paypal" selected="selected">paypal</option>
-        <option value="credit_card">Credit Card</option>
-      </select>
-    </div>
-    <div class="col-lg-6">
-      <label>Plan ID: </label>
-      <input type="text" name="planId" value="" size=64>
-    </div>
-
+      <h3>Billing Agreement Form</h3>
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Name</label>
+        <div class="col-sm-9">
+          <input type="text" name="name" value="Billing agreement name" class="form-control">
+        </div>
+      </div>
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Description</label>
+        <div class="col-sm-9">
+          <input type="text" name="description" value="Billing agreement description" class="form-control">
+        </div>
+      </div>
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Start Date</label>
+        <div class="col-sm-9">
+          <input type="text" name="startDate" value="<%= data.formInputs.startDate %>" class="form-control">
+        </div>
+      </div>
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Payment Method</label>
+        <div class="col-sm-9">
+          <select name="paymentMethod" class="form-control">
+            <option value="paypal" selected="selected">PayPal</option>
+            <option value="credit_card">Credit Card</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Plan ID</label>
+        <div class="col-sm-9">
+          <input type="text" name="planId" class="form-control">
+        </div>
+      </div>
 <!--
-    <div class="col-lg-6">
       <h3>Merchant Preferences</h3>
-    </div>
-    <div class="col-lg-6">
-      <label>Setup fee currency: </label>
-      <select name="mpSetupCurrency">
-        <option value="USD" selected="selected">USD</option>
-        <option value="JPY">JPY</option>
-      </select>
-    </div>
-    <div class="col-lg-6">
-      <label>Setup fee amount: </label>
-      <input type="text" name="pdSetupAmount" value="9.99">
-    </div>
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Setup fee currency</label>
+        <div class="col-sm-9">
+          <select name="mpSetupCurrency" class="form-control">
+            <option value="USD" selected="selected">USD</option>
+            <option value="JPY">JPY</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Setup fee amount</label>
+        <div class="col-sm-9">
+          <input type="text" name="pdSetupAmount" value="9.99" class="form-control">
+        </div>
+      </div>
 -->
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <button type="submit" class="btn btn-info">Submit</button>
+        </div>
+      </div>
 
-    <div class="col-lg-6">
-      <button type="submit" class="btn btn-info">Submit</button>
-    </div>
+    </form>
   </div>
-</form>
+</div>
+
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-sm-12">
     <% if (JSON.stringify(error) !== '{}') { %>
       <label>API call Failed</label>
-      <pre><code><%= errorStr %></code></pre>
+      <pre class="bg-danger"><code><%= errorStr %></code></pre>
     <% } %>
 
     <% if (data.billingAgreement) { %>
       <label>API call succeeded</label>
-      <pre><code><%= data.billingAgreementStr %></code></pre>
+      <pre class="bg-success"><code><%= data.billingAgreementStr %></code></pre>
     <% } %>
   </div>
 </div>

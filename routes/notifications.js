@@ -36,7 +36,7 @@ router.get('/webhooks', function(req, res, next) {
 });
 
 router.get('/webhook_events', function(req, res, next) {
-  var pageSizeParam = req.query['page_size'] || 'created';
+  var pageSizeParam = req.query['page_size'] || 0;
 
   paypal.notification.webhookEvent.list({ page_size: pageSizeParam }, function (err, result) {
     if (err) {
