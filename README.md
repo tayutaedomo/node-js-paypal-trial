@@ -11,6 +11,7 @@ Get PayPal sandbox information. See following:
 - https://developer.paypal.com/docs/classic/lifecycle/ug_sandbox/
 
 Set environment variables.
+If you use for production, you should set `PAYPAL_MODE=live`.
 ```
 export PAYPAL_MODE=sandbox
 export PAYPAL_CLIENT_ID=<your client id>
