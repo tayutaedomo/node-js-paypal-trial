@@ -206,7 +206,8 @@ router.post('/agreement', function(req, res, next) {
         data: {
           formInputs: createBillingAgreementFormInputs(req),
           billingAgreement: billingAgreement,
-          billingAgreementStr: beautify(JSON.stringify(billingAgreement), { indent_size: 2 })
+          billingAgreementStr: beautify(JSON.stringify(billingAgreement), { indent_size: 2 }),
+          redirect_url: billingAgreement.links[0].href
         }
       });
     }

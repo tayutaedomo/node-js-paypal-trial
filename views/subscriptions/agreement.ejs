@@ -77,6 +77,12 @@
     <% } %>
 
     <% if (data.billingAgreement) { %>
+      <div class="form-group">
+        <a href="<%= data.redirect_url %>" target="_blank">
+          <label class="btn btn-info">Redirect to PayPal</label>
+        </a>
+      </div>
+
       <label>API call succeeded</label>
       <pre class="bg-success"><code><%= data.billingAgreementStr %></code></pre>
     <% } %>
