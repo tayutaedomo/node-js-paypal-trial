@@ -1,0 +1,84 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <form method="post" action="/invoices/create" class="form-horizontal">
+      <h3>Invoice Form</h3>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Merchant Email</label>
+        <div class="col-sm-9">
+          <input type="email" name="merchantEmail" value="" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Payer Email</label>
+        <div class="col-sm-9">
+          <input type="email" name="payerEmail" value="" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Currency</label>
+        <div class="col-sm-9">
+          <select name="currency" class="form-control">
+            <option value="USD" selected="selected">USD</option>
+            <option value="JPY">JPY</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Item Name</label>
+        <div class="col-sm-9">
+          <input type="text" name="name" value="Item name" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Item Description</label>
+        <div class="col-sm-9">
+          <input type="text" name="description" value="Item description" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Quantity</label>
+        <div class="col-sm-9">
+          <input type="number" name="quantity" value="1" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Unit Price</label>
+        <div class="col-sm-9">
+          <input type="number" name="unitPrice" value="10.0" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <button type="submit" class="btn btn-info">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <% if (data.error) { %>
+      <label>API call Failed</label>
+      <pre class="bg-danger"><code><%= data.errorStr %></code></pre>
+    <% } %>
+
+    <% if (data.invoice) { %>
+      <label>API call succeeded</label>
+      <pre class="bg-success"><code><%= data.invoiceStr %></code></pre>
+    <% } %>
+  </div>
+</div>
+

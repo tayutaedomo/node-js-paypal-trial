@@ -1,5 +1,5 @@
-# node-paypal-subscription
-Try PayPal subscription on Node.js
+# node-js-paypal-api
+Try PayPal API on Node.js
 
 # Setup on your local
 Install node-dev.
@@ -32,6 +32,7 @@ Your app should now be running on http://localhost:3000.
 Access [http://localhost:3000/subscriptions](http://localhost:3000/subscriptions) on your browser.
 If display your API token, configuration is OK.
 
+
 ## Subscribe
 ### Create a new billing plan
 Access [http://localhost:3000/subscriptions/plan](http://localhost:3000/subscriptions/plan) on your browser.
@@ -57,6 +58,12 @@ Access [http://localhost:3000/subscriptions/agreement_execution](http://localhos
 Set the token, and then submit.
 
 
+## Invoice 
+Access [http://localhost:3000/invoices/create](http://localhost:3000/invoices/create) on your browser.
+Set some parameters, and then submit.
+If succeeded, you can get invoice id string.
+
+
 # References
 - Overview
   - https://developer.paypal.com/docs/integration/direct/rest-payments-overview/
@@ -65,11 +72,14 @@ Set the token, and then submit.
   - https://developer.paypal.com/docs/integration/direct/create-billing-plan/
   - https://developer.paypal.com/docs/integration/direct/create-billing-agreement/
 
+- Invoice
+  - https://developer.paypal.com/docs/integration/direct/invoicing/
+
 ## API
 - Docs
   - https://developer.paypal.com/docs/api/#billing-plans-and-agreements
   - https://developer.paypal.com/docs/rest/api/payments.billing-plans/
+  - https://developer.paypal.com/docs/api/invoicing/
 
 ## Leaning the Subscription billing from subscription button
 - https://www.paypal.com/webapps/mpp/get-started/subscription-button
-
