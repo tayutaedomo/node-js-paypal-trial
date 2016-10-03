@@ -24,7 +24,7 @@ router.get('/create', function(req, res, next) {
 });
 
 router.post('/create', function(req, res, next) {
-  var invoiceAtrributes = {
+  var params = {
     // merchantEmail: req.body.merchantEmail,
     // payerEmail: req.body.payerEmail,
     // currencyCode: req.body.currency,
@@ -53,7 +53,7 @@ router.post('/create', function(req, res, next) {
       }
     ]
   };
-  paypal.invoice.create(invoiceAtrributes, function(err, invoice) {
+  paypal.invoice.create(params, function(err, invoice) {
     if (err) {
       res.render('invoices/create', {
         title: 'Invoice Creation Failed',
@@ -68,6 +68,35 @@ router.post('/create', function(req, res, next) {
         data: {
           invoice: invoice,
           invoiceStr: beautify(JSON.stringify(invoice), { indent_size: 2 })
+        }
+      });
+    }
+  });
+});
+
+router.get('/send', function(req, res, next) {
+  res.render('invoices/send', {
+    title: 'Invoice Send',
+    data: {}
+  });
+});
+
+router.post('/send', function(req, res, next) {
+  paypal.invoice.send(req.body.id, function(err, result) {
+    if (err) {
+      res.render('invoices/send', {
+        title: 'Invoice Send Failed',
+        data: {
+          error: err,
+          errorStr: beautify(JSON.stringify(err), { indent_size: 2 })
+        }
+      });
+    } else {
+      res.render('invoices/send', {
+        title: 'Invoice Sent',
+        data: {
+          result: result,
+          resultStr: beautify(JSON.stringify(result), { indent_size: 2 })
         }
       });
     }
