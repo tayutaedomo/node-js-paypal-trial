@@ -42,9 +42,20 @@ router.post('/create', function(req, res, next) {
       email: req.body.merchantEmail,
       business_name: 'Business name'
     },
+    billing_info: [
+      {
+        email: req.body.payerEmail
+      }
+    ],
+    cc_info: [
+      {
+        email: req.body.merchantEmail
+      }
+    ],
     items: [
       {
         name: req.body.name,
+        description: req.body.description,
         quantity: req.body.quantity,
         unit_price: {
           currency: req.body.currency,
@@ -53,7 +64,7 @@ router.post('/create', function(req, res, next) {
       }
     ]
   };
-  paypal.invoice.create(params, function(err, invoice) {
+  paypal.invoice.create(params, function(err, result) {
     if (err) {
       res.render('invoices/create', {
         title: 'Invoice Creation Failed',
@@ -66,8 +77,8 @@ router.post('/create', function(req, res, next) {
       res.render('invoices/create', {
         title: 'Invoice Created',
         data: {
-          invoice: invoice,
-          invoiceStr: beautify(JSON.stringify(invoice), { indent_size: 2 })
+          result: result,
+          resultStr: beautify(JSON.stringify(result), { indent_size: 2 })
         }
       });
     }
