@@ -25,31 +25,18 @@ router.get('/create', function(req, res, next) {
 
 router.post('/create', function(req, res, next) {
   var params = {
-    // merchantEmail: req.body.merchantEmail,
-    // payerEmail: req.body.payerEmail,
-    // currencyCode: req.body.currency,
-    // itemList: [
-    //   {
-    //     name: req.body.name,
-    //     description: req.body.description,
-    //     quantity: req.body.quantity,
-    //     unitPrice: req.body.unitPrice
-    //     //taxName: "Tax1",
-    //     //"taxRate: "10.25"
-    //   }
-    // ]
     merchant_info: {
-      email: req.body.merchantEmail,
-      business_name: req.body.businessName
+      email: req.body.merchant_email,
+      business_name: req.body.business_name
     },
     billing_info: [
       {
-        email: req.body.payerEmail
+        email: req.body.payer_email
       }
     ],
     cc_info: [
       {
-        email: req.body.merchantEmail
+        email: req.body.merchant_email
       }
     ],
     items: [
@@ -59,7 +46,7 @@ router.post('/create', function(req, res, next) {
         quantity: req.body.quantity,
         unit_price: {
           currency: req.body.currency,
-          value: req.body.unitPrice
+          value: req.body.unit_price
         }
       }
     ]
