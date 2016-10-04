@@ -18,7 +18,7 @@ paypal.configure({
 
 router.get('/create', function(req, res, next) {
   res.render('invoices/create', {
-    title: 'Invoice Creation',
+    title: 'Invoice Create',
     data: {}
   });
 });
@@ -40,7 +40,7 @@ router.post('/create', function(req, res, next) {
     // ]
     merchant_info: {
       email: req.body.merchantEmail,
-      business_name: 'Business name'
+      business_name: req.body.businessName
     },
     billing_info: [
       {
@@ -67,7 +67,7 @@ router.post('/create', function(req, res, next) {
   paypal.invoice.create(params, function(err, result) {
     if (err) {
       res.render('invoices/create', {
-        title: 'Invoice Creation Failed',
+        title: 'Invoice Create Failed',
         data: {
           error: err,
           errorStr: beautify(JSON.stringify(err), { indent_size: 2 })
