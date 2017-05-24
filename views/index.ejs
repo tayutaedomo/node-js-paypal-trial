@@ -1,8 +1,8 @@
 <% layout('layout') -%>
 
-<h1><%= title %></h1>
+<!--<h1><%= title %></h1>-->
 
-<h2>Links</h2>
+<h2>Subscription</h2>
 <ul>
   <li><a href="/subscriptions">PayPal Initialization Check</a></li>
   <li><a href="/subscriptions/plans">Subscription Plans</a></li>
@@ -15,18 +15,26 @@
   <li><a href="/subscriptions/agreement_suspend">Subscription Agreement Suspend</a></li>
   <li><a href="/subscriptions/agreement/detail">Subscription Agreement Detail</a></li>
   <li><a href="/subscriptions/agreement/transactions">Subscription Agreement Transactions</a></li>
+</ul>
+
+<h2>Notification</h2>
+<ul>
   <li><a href="/notifications/webhooks">Notification Webhooks</a></li>
   <li><a href="/notifications/webhook_events">Notification Webhook Events</a></li>
   <li><a href="/notifications/webhook_event_types">Notification Webhook Event Types</a></li>
+</ul>
+
+<h2>Invoice</h2>
+<ul>
   <li><a href="/invoices/create">Invoice Create</a></li>
   <li><a href="/invoices/send">Invoice Send</a></li>
 </ul>
 
 <h2>Reference Transaction</h2>
 <ul>
-  <li><a href="/checkout">Express Checkout</a></li>
-  <li><a href="/agreement">Billing Agreement</a></li>
-  <li><a href="/transaction">Reference Transaction</a></li>
-  <li><a href="/void">Void Order</a></li>
+  <li><a href="/reference_transactions/checkout">Express Checkout</a></li>
+  <li><a href="/reference_transactions/agreement">Billing Agreement</a></li>
+  <li><a href="/reference_transactions/transaction">Reference Transaction</a></li>
+  <li><a href="/reference_transactions/void">Void Order</a></li>
 </ul>
 

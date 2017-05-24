@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <form method="post" action="/transaction" class="form-horizontal">
+    <form method="post" action="/reference_transactions/transaction" class="form-horizontal">
       <div class="form-group">
         <label class="col-sm-3 control-label">Token</label>
         <div class="col-sm-9">
@@ -47,7 +47,7 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-12">
     <% if (JSON.stringify(error) !== '{}') { %>
       <label>API call Failed</label>
       <pre class="bg-danger"><code><%= error.message %></code></pre>

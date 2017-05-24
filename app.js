@@ -10,6 +10,7 @@ var routes = require('./routes/index');
 var subscriptions = require('./routes/subscriptions');
 var notifications = require('./routes/notifications');
 var invoices = require('./routes/invoices');
+var reference_transactions = require('./routes/reference_transactions');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/subscriptions', subscriptions);
 app.use('/notifications', notifications);
 app.use('/invoices', invoices);
+app.use('/reference_transactions', reference_transactions);
 app.use('/', routes);
 
 // catch 404 and forward to error handler
