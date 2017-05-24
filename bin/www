@@ -1,11 +1,11 @@
-#!/usr/bin/env node-dev
+#!/usr/bin/env node
 
 /**
  * Module dependencies.
  */
 
 var app = require('../app');
-var debug = require('debug')('node-paypal-subscription:server');
+var debug = require('debug')('node-js-paypal-trial:server');
 var http = require('http');
 
 /**

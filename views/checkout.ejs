@@ -1,0 +1,72 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <form method="post" action="/checkout" class="form-horizontal">
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Currency</label>
+        <div class="col-sm-9">
+          <select name="currency" class="form-control">
+            <option value="USD" selected="selected">USD</option>
+            <option value="JPY">JPY</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Description</label>
+        <div class="col-sm-9">
+          <input type="text" name="description" value="Billing Description" class="form-control">
+        </div>
+      </div>
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Cancel URL</label>
+        <div class="col-sm-9">
+          <input type="text" name="cancel_url" value="http://localhost:3000/checkout/callback_cancel"
+                 class="form-control">
+        </div>
+      </div>
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Return URL</label>
+        <div class="col-sm-9">
+          <input type="text" name="return_url" value="http://localhost:3000/checkout/callback_success"
+                 class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <button type="submit" class="btn btn-info">Do SetExpressCheckout</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <% if (JSON.stringify(error) !== '{}') { %>
+      <label>API call Failed</label>
+      <pre class="bg-danger"><code><%= error.message %></code></pre>
+    <% } %>
+
+    <% if (JSON.stringify(data) !== '{}') { %>
+      <label>API call succeeded</label>
+      <pre class="bg-success"><code><%= data.message %></code></pre>
+
+      <% if (data.redirect_url) { %>
+        <div>
+          <a href="<%= data.redirect_url %>" target="_blank">
+            <label type="submit" class="btn btn-info btn-lg">Redirect to PayPal</label>
+          </a>
+        </div>
+      <% } %>
+
+      <% if (data.params) { %>
+        <label>Request Parameters</label>
+        <pre><code><%= data.params %></code></pre>
+      <% } %>
+    <% } %>
+  </div>
+</div>
+
