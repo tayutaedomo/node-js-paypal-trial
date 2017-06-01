@@ -19,9 +19,10 @@
     "js-beautify": "^1.6.3",
     "moment": "^2.11.2",
     "morgan": "~1.6.1",
+    "paypal-adaptive": "^0.4.2",
+    "paypal-ec2": "^0.3.0",
     "paypal-rest-sdk": "^1.6.8",
     "pp-ipn": "^1.0.5",
-    "paypal-ec2": "^0.3.0",
     "serve-favicon": "~2.3.0"
   }
 }

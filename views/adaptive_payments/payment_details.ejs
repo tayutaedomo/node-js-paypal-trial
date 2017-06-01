@@ -1,0 +1,36 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <form method="post" action="/adaptive_payments/payment_details" class="form-horizontal">
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Transaction ID</label>
+        <div class="col-sm-9">
+          <input type="text" name="id" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <button type="submit" class="btn btn-info">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <% if (JSON.stringify(data.error)) { %>
+      <h2>API call Failed</h2>
+      <pre class="bg-danger"><code><%= data.errorStr %></code></pre>
+    <% } %>
+
+    <% if (data.resultStr) { %>
+      <h2>Result</h2>
+      <pre class="bg-success"><code><%= data.resultStr %></code></pre>
+    <% } %>
+  </div>
+</div>
+

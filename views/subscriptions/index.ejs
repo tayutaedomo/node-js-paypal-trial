@@ -1,10 +1,10 @@
 <% layout('layout') %>
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-12">
     <h1><%= title %></h1>
   </div>
-  <div class="col-lg-6">
+  <div class="col-lg-12">
     <% if (JSON.stringify(error) !== '{}') { %>
       <label>API call Failed.</label>
       <p><%= JSON.stringify(error) %></p>

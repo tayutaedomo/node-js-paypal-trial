@@ -4,12 +4,7 @@ Try PayPal API on Node.js
 - Subscription
 - Invoice
 - Reference Transaction
-
-
-# What is Reference Transaction?
-See following:
-- English: [https://developer.paypal.com/docs/classic/express-checkout/integration-guide/ECReferenceTxns/](https://developer.paypal.com/docs/classic/express-checkout/integration-guide/ECReferenceTxns/)
-- Japanese: [pp_expresscheckout_advancedfeaturesguide_jp.pdf](https://www.paypalobjects.com/webstatic/ja_JP/developer/docs/pdf/pp_expresscheckout_advancedfeaturesguide_jp.pdf)
+- Adaptive Payments
 
 
 # Prepare
@@ -48,12 +43,12 @@ Your app should now be running on http://localhost:3000.
 
 
 # Operation
+## Subscribe
 ## Confirm Configuration
 Access [http://localhost:3000/subscriptions](http://localhost:3000/subscriptions) on your browser.
 If display your API token, configuration is OK.
 
 
-## Subscribe
 ### Create a new billing plan
 Access [http://localhost:3000/subscriptions/plan](http://localhost:3000/subscriptions/plan) on your browser.
 Set some parameters, and then submit.
@@ -84,7 +79,8 @@ Set some parameters, and then submit.
 If succeeded, you can get invoice id string.
 
 
-## SetExpressCheckout
+## Reference Transaction
+### SetExpressCheckout
 Access [http://localhost:3000/checkout](http://localhost:3000/checkout) on your browser.
 
 ![checkout 1](https://raw.githubusercontent.com/tayutaedomo/node-paypal-reference-transaction/images/public/images/2016-06-08_capture_checkout_1.png)
@@ -92,11 +88,11 @@ Access [http://localhost:3000/checkout](http://localhost:3000/checkout) on your 
 ![checkout 2](https://raw.githubusercontent.com/tayutaedomo/node-paypal-reference-transaction/images/public/images/2016-06-08_capture_checkout_2.png)
 
 
-## Callback from PayPal
+### Callback from PayPal
 ![checkout 3](https://raw.githubusercontent.com/tayutaedomo/node-paypal-reference-transaction/images/public/images/2016-06-08_capture_checkout_3.png)
 
 
-## CreateBillingAgreement
+### CreateBillingAgreement
 Access [http://localhost:3000/agreement](http://localhost:3000/agreement) on your browser.
 
 ![agreement 1](https://raw.githubusercontent.com/tayutaedomo/node-paypal-reference-transaction/images/public/images/2016-06-08_capture_agreement_1.png)
@@ -104,12 +100,16 @@ Access [http://localhost:3000/agreement](http://localhost:3000/agreement) on you
 ![agreement 2](https://raw.githubusercontent.com/tayutaedomo/node-paypal-reference-transaction/images/public/images/2016-06-08_capture_agreement_2.png)
 
 
-## DoReferenceTransaction
+### DoReferenceTransaction
 Access [http://localhost:3000/transaction](http://localhost:3000/transaction) on your browser.
 
 ![transaction 1](https://raw.githubusercontent.com/tayutaedomo/node-paypal-reference-transaction/images/public/images/2016-06-08_capture_transaction_1.png)
 
 ![transaction 2](https://raw.githubusercontent.com/tayutaedomo/node-paypal-reference-transaction/images/public/images/2016-06-08_capture_transaction_2.png)
+
+
+## Adaptive Payments
+WIP
 
 
 # References
@@ -123,11 +123,10 @@ Access [http://localhost:3000/transaction](http://localhost:3000/transaction) on
 - Invoice
   - https://developer.paypal.com/docs/integration/direct/invoicing/
 
-## API
-- Docs
-  - https://developer.paypal.com/docs/api/#billing-plans-and-agreements
-  - https://developer.paypal.com/docs/rest/api/payments.billing-plans/
-  - https://developer.paypal.com/docs/api/invoicing/
+- Reference Transaction?
+  - English: [https://developer.paypal.com/docs/classic/express-checkout/integration-guide/ECReferenceTxns/](https://developer.paypal.com/docs/classic/express-checkout/integration-guide/ECReferenceTxns/)
+  - Japanese: [pp_expresscheckout_advancedfeaturesguide_jp.pdf](https://www.paypalobjects.com/webstatic/ja_JP/developer/docs/pdf/pp_expresscheckout_advancedfeaturesguide_jp.pdf)
+
 
 ## Leaning the Subscription billing from subscription button
 - https://www.paypal.com/webapps/mpp/get-started/subscription-button
@@ -136,7 +135,15 @@ Access [http://localhost:3000/transaction](http://localhost:3000/transaction) on
 ## How to use express-checkout
 - https://developer.paypal.com/docs/classic/express-checkout/ht_ec-refTrans-SetEC-DoRefTrans-curl-etc/
 
+
 ## API Docs
+- Billing Plan & Agreement
+  - https://developer.paypal.com/docs/api/#billing-plans-and-agreements
+  - https://developer.paypal.com/docs/rest/api/payments.billing-plans/
+
+- Invoice
+  - https://developer.paypal.com/docs/api/invoicing/
+
 - SetExpressCheckout
   - https://developer.paypal.com/docs/classic/api/merchant/SetExpressCheckout_API_Operation_NVP/
 
