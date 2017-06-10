@@ -147,6 +147,56 @@ router.post('/preapproval_details', function(req, res, next) {
   });
 });
 
+router.get('/pay', function(req, res, next) {
+  res.render('adaptive_payments/pay', {
+    title: 'Pay',
+    data: {
+      preapprovalKey: req.query.preapprovalKey ? req.query.preapprovalKey : '',
+      unixtime: moment().valueOf()
+    }
+  });
+});
+
+router.post('/pay', function(req, res, next) {
+  var paypal_sdk = create_paypal_sdk();
+
+  var params = {
+    actionType: 'PAY',
+    currencyCode: req.body.currencyCode,
+    feesPayer: req.body.feesPayer,
+    memo: req.body.memo,
+    preapprovalKey: req.body.preapprovalKey,
+    receiverList: {
+      receiver: [
+        {
+          amount: req.body.amount,
+          email: req.body.email
+        }
+      ]
+    },
+    senderEmail: req.body.senderEmail,
+    returnUrl: req.body.returnUrl,
+    cancelUrl: req.body.cancelUrl,
+    requestEnvelope: {
+      errorLanguage: 'en_US'
+    }
+  };
+
+  paypal_sdk.pay(params, function(err, response) {
+    res.render('adaptive_payments/pay', {
+      title: 'Pay',
+      data: {
+        preapprovalKey: '',
+        unixtime: moment().valueOf(),
+        error: err ? err : null,
+        errorStr: err ? beautify(JSON.stringify(err.toString()), { indent_size: 2 }) : null,
+        result: response,
+        resultStr: beautify(JSON.stringify(response), { indent_size: 2 })
+      }
+    });
+  });
+});
+
 
 module.exports = router;
 

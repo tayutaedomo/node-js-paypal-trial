@@ -1,0 +1,98 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <form method="post" action="/adaptive_payments/pay" class="form-horizontal">
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Currency</label>
+        <div class="col-sm-9">
+          <select name="currencyCode" class="form-control">
+            <option value="USD" selected="selected">USD</option>
+            <option value="JPY">JPY</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Fees Payer</label>
+        <div class="col-sm-9">
+          <select name="feesPayer" class="form-control">
+            <option value="EACHRECEIVER" selected="selected">EACHRECEIVER</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Memo</label>
+        <div class="col-sm-9">
+          <input type="text" name="memo" class="form-control" value="Memo">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Preapproval Key</label>
+        <div class="col-sm-9">
+          <input type="text" name="preapprovalKey" class="form-control" value="<%= data.preapprovalKey %>">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Receiver Amount</label>
+        <div class="col-sm-9">
+          <input type="number" name="amount" class="form-control" value="10.0">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Receiver Email</label>
+        <div class="col-sm-9">
+          <input type="email" name="email" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Sender Email</label>
+        <div class="col-sm-9">
+          <input type="email" name="senderEmail" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Return Callback</label>
+        <div class="col-sm-9">
+          <input type="text" name="returnUrl" class="form-control" value="http://localhost:3000/adaptive_payments/pay/callback?id=<%= data.unixtime %>">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Canceled Callback</label>
+        <div class="col-sm-9">
+          <input type="text" name="cancelUrl" class="form-control" value="http://localhost:3000/adaptive_payments/pay/canceled_callback?id=<%= data.unixtime %>">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <button type="submit" class="btn btn-info">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <% if (data.error) { %>
+      <h2>API call Failed</h2>
+      <pre class="bg-danger"><code><%= data.errorStr %></code></pre>
+    <% } %>
+
+    <% if (data.resultStr) { %>
+      <h2>Result</h2>
+      <pre class="bg-success"><code><%= data.resultStr %></code></pre>
+    <% } %>
+  </div>
+</div>
+
