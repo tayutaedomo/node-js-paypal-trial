@@ -1,0 +1,93 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <form method="post" action="/adaptive_payments/preapproval" class="form-horizontal">
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Approved Callback</label>
+        <div class="col-sm-9">
+          <input type="text" name="returnUrl" class="form-control" value="http://localhost:3000/preapproval/approved_callback">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Canceled Callback</label>
+        <div class="col-sm-9">
+          <input type="text" name="cancelUrl" class="form-control" value="http://localhost:3000/preapproval/canceled_callback">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Starting Date</label>
+        <div class="col-sm-9">
+          <input type="text" name="startingDate" class="form-control" value="<%= data.startingDate %>">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Ending Date</label>
+        <div class="col-sm-9">
+          <input type="text" name="endingDate" class="form-control" value="<%= data.endingDate %>">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Max Amount Per Payment</label>
+        <div class="col-sm-9">
+          <input type="number" name="maxAmountPerPayment" class="form-control" value="1000.00">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Max Number Of Payment</label>
+        <div class="col-sm-9">
+          <input type="number" name="maxNumberOfPayments" class="form-control" value="10">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Max Total Amount Of All Payment</label>
+        <div class="col-sm-9">
+          <input type="number" name="maxTotalAmountOfAllPayments" class="form-control" value="10000.00">
+        </div>
+      </div>
+
+      <div class="form-group form-group-sm">
+        <label class="col-sm-3 control-label">Currency</label>
+        <div class="col-sm-9">
+          <select name="currencyCode" class="form-control">
+            <option value="USD" selected="selected">USD</option>
+            <option value="JPY">JPY</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <button type="submit" class="btn btn-info">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <% if (JSON.stringify(data.error)) { %>
+      <h2>API call Failed</h2>
+      <pre class="bg-danger"><code><%= data.errorStr %></code></pre>
+    <% } %>
+
+    <% if (data.resultStr) { %>
+      <h2>Result</h2>
+      <pre class="bg-success"><code><%= data.resultStr %></code></pre>
+    <% } %>
+
+    <% if (data.result && data.result.preapprovalUrl) { %>
+      <a class="btn btn-info" href="<%= data.result.preapprovalUrl %>" target="_blank">Redirect to PayPal</a>
+    <% } %>
+  </div>
+</div>
+
