@@ -88,6 +88,10 @@
     <% if (data.result && data.result.preapprovalUrl) { %>
       <a class="btn btn-info" href="<%= data.result.preapprovalUrl %>" target="_blank">Redirect to PayPal</a>
     <% } %>
+
+    <% if (data.result && data.result.preapprovalKey) { %>
+      <a class="btn btn-info" href="/adaptive_payments/preapproval_details?preapprovalKey=<%= data.result.preapprovalKey %>" target="_blank">Redirect to Preapproval Details</a>
+    <% } %>
   </div>
 </div>
 

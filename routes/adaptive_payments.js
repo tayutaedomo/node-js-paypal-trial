@@ -93,7 +93,7 @@ router.post('/preapproval', function(req, res, next) {
 });
 
 router.get('/preapproval/approved_callback', function(req, res, next) {
-  res.render('adaptive_payments/preapproval_callback.ejs', {
+  res.render('adaptive_payments/preapproval_callback', {
     title: 'Preapproval Approval Callback',
     data: {
       result: req.query,
@@ -103,12 +103,47 @@ router.get('/preapproval/approved_callback', function(req, res, next) {
 });
 
 router.get('/preapproval/canceled_callback', function(req, res, next) {
-  res.render('adaptive_payments/preapproval_callback.ejs', {
+  res.render('adaptive_payments/preapproval_callback', {
     title: 'Preapproval Canceled Callback',
     data: {
       result: req.query,
       resultStr: beautify(JSON.stringify(req.query), { indent_size: 2 })
     }
+  });
+});
+
+router.get('/preapproval_details', function(req, res, next) {
+  res.render('adaptive_payments/preapproval_details', {
+    title: 'Preapproval Detail',
+    data: {
+      preapprovalKey: req.query.preapprovalKey ? req.query.preapprovalKey : ''
+    }
+  });
+});
+
+router.post('/preapproval_details', function(req, res, next) {
+  var paypal_sdk = create_paypal_sdk();
+
+  var params = {
+    preapprovalKey: req.body.preapprovalKey,
+    requestEnvelope: {
+      errorLanguage: 'en_US'
+    }
+  };
+
+  paypal_sdk.preapprovalDetails(params, function(err, response) {
+    debug('preapproval_detail err', err);
+
+    res.render('adaptive_payments/preapproval_details', {
+      title: 'Preapproval Detail',
+      data: {
+        preapprovalKey: '',
+        error: err ? err : null,
+        errorStr: err ? beautify(JSON.stringify(err.toString()), { indent_size: 2 }) : null,
+        result: response,
+        resultStr: beautify(JSON.stringify(response), { indent_size: 2 })
+      }
+    });
   });
 });
 
