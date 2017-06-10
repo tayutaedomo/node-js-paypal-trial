@@ -8,6 +8,8 @@ var beautify = require('js-beautify').js_beautify;
 var moment = require('moment');
 var Paypal = require('paypal-adaptive');
 
+var DOMAIN = process.env.DOMAIN || 'http://localhost:3000';
+
 
 function create_paypal_sdk() {
   return new Paypal({
@@ -53,6 +55,7 @@ router.get('/preapproval', function(req, res, next) {
   res.render('adaptive_payments/preapproval.ejs', {
     title: 'Preapproval',
     data: {
+      domain: DOMAIN,
       unixtime: moment().valueOf(),
       startingDate: moment().toISOString(),
       endingDate: moment().add(1, 'month').toISOString()
@@ -83,6 +86,7 @@ router.post('/preapproval', function(req, res, next) {
     res.render('adaptive_payments/preapproval', {
       title: 'Preapproval',
       data: {
+        domain: DOMAIN,
         error: err ? err : null,
         errorStr: err ? beautify(JSON.stringify(err.toString()), { indent_size: 2 }) : null,
         result: response,
@@ -151,6 +155,7 @@ router.get('/pay', function(req, res, next) {
   res.render('adaptive_payments/pay', {
     title: 'Pay',
     data: {
+      domain: DOMAIN,
       preapprovalKey: req.query.preapprovalKey ? req.query.preapprovalKey : '',
       unixtime: moment().valueOf()
     }
@@ -186,6 +191,7 @@ router.post('/pay', function(req, res, next) {
     res.render('adaptive_payments/pay', {
       title: 'Pay',
       data: {
+        domain: DOMAIN,
         preapprovalKey: '',
         unixtime: moment().valueOf(),
         error: err ? err : null,

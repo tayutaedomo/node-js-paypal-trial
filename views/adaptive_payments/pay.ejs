@@ -62,7 +62,7 @@
       <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Return Callback</label>
         <div class="col-sm-9">
-          <input type="text" name="returnUrl" class="form-control" value="http://localhost:3000/adaptive_payments/pay/callback?id=<%= data.unixtime %>">
+          <input type="text" name="returnUrl" class="form-control" value="<%= data.domain %>/adaptive_payments/pay/callback?id=<%= data.unixtime %>">
         </div>
       </div>
 
