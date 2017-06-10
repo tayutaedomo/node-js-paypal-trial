@@ -8,14 +8,14 @@
       <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Approved Callback</label>
         <div class="col-sm-9">
-          <input type="text" name="returnUrl" class="form-control" value="http://localhost:3000/preapproval/approved_callback">
+          <input type="text" name="returnUrl" class="form-control" value="http://localhost:3000/adaptive_payments/preapproval/approved_callback?id=<%= data.unixtime %>">
         </div>
       </div>
 
       <div class="form-group form-group-sm">
         <label class="col-sm-3 control-label">Canceled Callback</label>
         <div class="col-sm-9">
-          <input type="text" name="cancelUrl" class="form-control" value="http://localhost:3000/preapproval/canceled_callback">
+          <input type="text" name="cancelUrl" class="form-control" value="http://localhost:3000/adaptive_payments/preapproval/canceled_callback?id=<%= data.unixtime %>">
         </div>
       </div>
 

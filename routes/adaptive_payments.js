@@ -53,6 +53,7 @@ router.get('/preapproval', function(req, res, next) {
   res.render('adaptive_payments/preapproval.ejs', {
     title: 'Preapproval',
     data: {
+      unixtime: moment().valueOf(),
       startingDate: moment().toISOString(),
       endingDate: moment().add(1, 'month').toISOString()
     }
@@ -88,6 +89,26 @@ router.post('/preapproval', function(req, res, next) {
         resultStr: beautify(JSON.stringify(response), { indent_size: 2 })
       }
     });
+  });
+});
+
+router.get('/preapproval/approved_callback', function(req, res, next) {
+  res.render('adaptive_payments/preapproval_callback.ejs', {
+    title: 'Preapproval Approval Callback',
+    data: {
+      result: req.query,
+      resultStr: beautify(JSON.stringify(req.query), { indent_size: 2 })
+    }
+  });
+});
+
+router.get('/preapproval/canceled_callback', function(req, res, next) {
+  res.render('adaptive_payments/preapproval_callback.ejs', {
+    title: 'Preapproval Canceled Callback',
+    data: {
+      result: req.query,
+      resultStr: beautify(JSON.stringify(req.query), { indent_size: 2 })
+    }
   });
 });
 
