@@ -26,6 +26,7 @@ Set environment variables.
 If you use for production, you should set `PAYPAL_MODE=live`.
 ```
 export PAYPAL_MODE=sandbox
+export PAYPAL_ENV=sandbox
 export PAYPAL_CLIENT_ID=<your client id>
 export PAYPAL_CLIENT_SECRET=<your client secret>
 export PAYPAL_USER=<your user id for NVP API>

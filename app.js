@@ -14,6 +14,7 @@ var notifications = require('./routes/notifications');
 var invoices = require('./routes/invoices');
 var reference_transactions = require('./routes/reference_transactions');
 var adaptive_payments = require('./routes/adaptive_payments');
+var mass_pay = require('./routes/mass_pay');
 
 
 var app = express();
@@ -38,6 +39,7 @@ app.use('/notifications', notifications);
 app.use('/invoices', invoices);
 app.use('/reference_transactions', reference_transactions);
 app.use('/adaptive_payments', adaptive_payments);
+app.use('/mass_pay', mass_pay);
 app.use('/', routes);
 
 
