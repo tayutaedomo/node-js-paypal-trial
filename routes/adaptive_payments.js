@@ -151,9 +151,9 @@ router.post('/preapproval_details', function(req, res, next) {
   });
 });
 
-router.get('/pay', function(req, res, next) {
-  res.render('adaptive_payments/pay', {
-    title: 'Pay',
+router.get('/preapproval_pay', function(req, res, next) {
+  res.render('adaptive_payments/preapproval_pay', {
+    title: 'Preapproval Pay',
     data: {
       domain: DOMAIN,
       preapprovalKey: req.query.preapprovalKey ? req.query.preapprovalKey : '',
@@ -162,7 +162,7 @@ router.get('/pay', function(req, res, next) {
   });
 });
 
-router.post('/pay', function(req, res, next) {
+router.post('/preapproval_pay', function(req, res, next) {
   var paypal_sdk = create_paypal_sdk();
 
   var params = {
@@ -188,8 +188,8 @@ router.post('/pay', function(req, res, next) {
   };
 
   paypal_sdk.pay(params, function(err, response) {
-    res.render('adaptive_payments/pay', {
-      title: 'Pay',
+    res.render('adaptive_payments/preapproval_pay', {
+      title: 'Preapproval Pay',
       data: {
         domain: DOMAIN,
         preapprovalKey: '',
