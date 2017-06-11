@@ -74,6 +74,26 @@ router.post('/pay', function(req, res, next) {
   });
 });
 
+router.get('/pay/callback', function(req, res, next) {
+  res.render('adaptive_payments/pay_callback', {
+    title: 'Pay Return Callback',
+    data: {
+      result: req.query,
+      resultStr: beautify(JSON.stringify(req.query), { indent_size: 2 })
+    }
+  });
+});
+
+router.get('/pay/canceled_callback', function(req, res, next) {
+  res.render('adaptive_payments/pay_callback', {
+    title: 'Pay Canceled Callback',
+    data: {
+      result: req.query,
+      resultStr: beautify(JSON.stringify(req.query), { indent_size: 2 })
+    }
+  });
+});
+
 router.get('/payment_details', function(req, res, next) {
   res.render('adaptive_payments/payment_details.ejs', {
     title: 'Payment Details',
