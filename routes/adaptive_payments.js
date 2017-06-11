@@ -21,6 +21,59 @@ function create_paypal_sdk() {
 }
 
 
+router.get('/pay', function(req, res, next) {
+  res.render('adaptive_payments/pay', {
+    title: 'Pay',
+    data: {
+      domain: DOMAIN,
+      unixtime: moment().valueOf()
+    }
+  });
+});
+
+router.post('/pay', function(req, res, next) {
+  var paypal_sdk = create_paypal_sdk();
+
+  var params = {
+    actionType: req.body.actionType,
+    clientDetails: {
+      applicationId: req.body.applicationId,
+      ipAddress: req.body.ipAddress
+    },
+    currencyCode: req.body.currencyCode,
+    feesPayer: req.body.feesPayer,
+    memo: req.body.memo,
+    receiverList: {
+      receiver: [
+        {
+          amount: req.body.amount,
+          email: req.body.email
+          //primary: true
+        }
+      ]
+    },
+    returnUrl: req.body.returnUrl,
+    cancelUrl: req.body.cancelUrl,
+    requestEnvelope: {
+      errorLanguage: 'en_US'
+    }
+  };
+
+  paypal_sdk.pay(params, function(err, response) {
+    res.render('adaptive_payments/pay', {
+      title: 'Pay',
+      data: {
+        domain: DOMAIN,
+        unixtime: moment().valueOf(),
+        error: err ? err : null,
+        errorStr: err ? beautify(JSON.stringify(err.toString()), { indent_size: 2 }) : null,
+        result: response,
+        resultStr: beautify(JSON.stringify(response), { indent_size: 2 })
+      }
+    });
+  });
+});
+
 router.get('/payment_details', function(req, res, next) {
   res.render('adaptive_payments/payment_details.ejs', {
     title: 'Payment Details',
